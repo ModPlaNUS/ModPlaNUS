@@ -31,7 +31,7 @@ export default function Calculator() {
   const [credits, setCredits] = useState(0);
   const [mc, setMC] = useState(0);
   const [addModuleText, setAddModuleText] = useState("");
-  const [cmc, setCMC] = useState(20);
+  const [cmc, setCMC] = useState(0);
   const [cap, setCap] = useState(5);
   const [firstName, setFirstName] = useState('');
   const [lastName, setLastName] = useState('');
@@ -182,22 +182,22 @@ export default function Calculator() {
             }}
           >
             <Typography component="h1" variant="h5">
-              CAP Calculator!
+              CAP Calculator
             </Typography>
             <Box component="form" noValidate sx={{ mt: 1 }}
 >
             <h2>Add Data</h2>
             <form onSubmit={handleAddModule}>
+              <Typography>
               Module Name
+              </Typography>
               <label>
                 <Input
                   style={{ margin: "0 1rem" }}
                   type="text"
                   value={addModuleText}
                   onChange={(event) => {
-
                         setAddModuleText(event.target.value);
-
                   }
                   }
                 />
@@ -205,7 +205,9 @@ export default function Calculator() {
             </form>
             <p> </p>
             <FormControl variant="standard" sx={{ m: 1, minWidth: 275 }} onSubmit={handleAddModule}>
-              <InputLabel id="demo-simple-select-standard-label"> Grade </InputLabel>
+            <Typography>
+             Grade
+            </Typography>
               <Select
                 labelId="demo-simple-select-standard-label"
                 id="demo-simple-select-standard"
@@ -215,7 +217,7 @@ export default function Calculator() {
                   temp = event.target.value; 
                   setAddGradeText(event.target.value);
                 }}
-                label="Grade"
+                // label="Grade"
               >
                 <MenuItem value="">
                 </MenuItem>
@@ -236,7 +238,9 @@ export default function Calculator() {
             </FormControl>
             <p> </p>
             <form onSubmit={handleAddModule}>
-              Input MC
+            <Typography>
+              Module Credits (MC)
+            </Typography>
               <label>
                 <Input
                   style={{ margin: "0 1rem" }}
@@ -269,7 +273,7 @@ export default function Calculator() {
                   <th>Modules</th>
                   <th>Grade</th>
                   <th>MC</th>
-                  <th>MC*GP</th>
+                  <th>Score</th>
                 </tr>
               </thead>
               <tbody>
@@ -284,8 +288,8 @@ export default function Calculator() {
                 ))}
               </tbody>
             </table>
-            <h4>Cummulative CAP is: {cap}</h4>
             <h4>CAP is: {(credits + (cap*cmc)) / (mc + cmc)}</h4>
+            <h4>Cummulative CAP is: {cap}</h4>
 
             <Grid item xs={12} m={5}>
             <Button variant="contained" 
