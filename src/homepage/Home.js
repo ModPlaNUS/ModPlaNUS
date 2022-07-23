@@ -118,11 +118,18 @@ export default function Home() {
 
 
     const currUser = () => {
+      if(auth.currentUser){
             let user = auth.currentUser;
             // console.log(mods);
                return (
                    <p> Hello {user.email} </p>
                );
+
+      } else {
+        return (
+          <p> There seems to be an error in fetching your data (PLEASE LOG IN AGAIN...) </p>
+      );
+      }
 
     }
 
