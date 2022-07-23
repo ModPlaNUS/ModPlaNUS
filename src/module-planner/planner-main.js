@@ -1117,7 +1117,7 @@ function addToList(code, grade, modCred, workHrs){
         await updateDoc(userDoc, userNew);
     }
     else{
-     alert("Please choose a year and semester!");
+     //alert("Please choose a year and semester!");
     }
   }
 
