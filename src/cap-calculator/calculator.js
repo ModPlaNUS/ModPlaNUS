@@ -285,7 +285,7 @@ export default function Calculator() {
               </tbody>
             </table>
             <h4>Cummulative CAP is: {cap}</h4>
-            <h4>CAP is: {(credits + (cap*cmc)) / (mc + cmc)}</h4>
+            <h4>CAP is: {((credits + (cap*cmc)) / (mc + cmc)).toFixed(2)}</h4>
 
             <Grid item xs={12} m={5}>
             <Button variant="contained" 
