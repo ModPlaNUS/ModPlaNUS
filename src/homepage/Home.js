@@ -50,7 +50,6 @@ export function ModuleList(props) {
               <th>Module</th>
               <th>Grade</th>
               <th>MC</th>
-              <th>Workload (hrs/week)</th>
               <th>Completed</th>
             </tr>
           </thead>
@@ -61,7 +60,6 @@ export function ModuleList(props) {
                 <td>{mods.code}</td>
                 <td>{mods.grade}</td>
                 <td>{mods.mc}</td>
-                <td>{mods.workLoad}</td>
                 <td>
                   <input
                     type="checkbox"
@@ -107,7 +105,16 @@ export default function Home() {
   }
 
   React.useEffect(()=>{getInfo()}, []);
-  React.useEffect(()=>{setModsY1S1(userInfo.newMods)}, [userInfo]);
+  React.useEffect(()=>{
+    setModsY1S1(userInfo.Y1S1Planned);
+    setModsY1S2(userInfo.Y1S2Planned);
+    setModsY2S1(userInfo.Y2S1Planned);
+    setModsY2S2(userInfo.Y2S2Planned);
+    setModsY3S1(userInfo.Y3S1Planned);
+    setModsY3S2(userInfo.Y3S2Planned);
+    setModsY4S1(userInfo.Y4S1Planned);
+    setModsY4S1(userInfo.Y4S2Planned);
+  }, [userInfo]);
 
 
     const currUser = () => {
@@ -121,7 +128,7 @@ export default function Home() {
 
   return (
     <>
-    <Card sx={{ maxWidth: 3450,  margin: 25 }}>
+    <Card sx={{ maxWidth: 3450,  margin: 2 }}>
       <CardContent>
         <Typography variant="body2" color="text.secondary">
          You are logged in as: {currUser()}
@@ -129,15 +136,99 @@ export default function Home() {
       </CardContent>
     </Card>
       <p></p>
-      <Card>
-        <Box>
-          <Typography variant='h6'>
-            <ModuleList modules={modsY1S1} setModules = {setModsY1S1} />
-          </Typography>
-        </Box>
+      <Card sx={{ p: 2 }}>
+      <Buttons/>
       </Card>
+      <p></p>
+
+        <Card sx={{ p: 2 }}>
+          <Typography variant='h6'>
+          YEAR 1 SEM 1
+          </Typography>
+          {modsY1S1 ? (
+                <ModuleList modules={modsY1S1} setModules={setModsY1S1} />
+            ) : (
+                <p>No Plan</p>
+            )}
+        </Card>
+        <p></p>
+        <Card sx={{ p: 2 }}>
+          <Typography variant='h6'>
+          YEAR 1 SEM 2
+          </Typography>
+          {modsY1S2 ? (
+                <ModuleList modules={modsY1S2} setModules={setModsY1S2} />
+            ) : (
+                <p>No Plan</p>
+            )}
+        </Card>
+        <p></p>
+        <Card sx={{ p: 2 }}>
+          <Typography variant='h6'>
+          YEAR 2 SEM 1
+          </Typography>
+          {modsY2S1 ? (
+                <ModuleList modules={modsY2S1} setModules={setModsY2S1} />
+            ) : (
+                <p>No Plan</p>
+            )}
+        </Card>
+        <p></p>
+        <Card sx={{ p: 2 }}>
+          <Typography variant='h6'>
+          YEAR 2 SEM 2
+          </Typography>
+          {modsY2S1 ? (
+                <ModuleList modules={modsY2S2} setModules={setModsY2S2} />
+            ) : (
+                <p>No Plan</p>
+            )}
+        </Card>
+        <p></p>
+        <Card sx={{ p: 2 }}>
+          <Typography variant='h6'>
+          YEAR 3 SEM 1
+          </Typography>
+          {modsY2S1 ? (
+                <ModuleList modules={modsY3S1} setModules={setModsY3S1} />
+            ) : (
+                <p>No Plan</p>
+            )}
+        </Card>
+        <p></p>
+        <Card sx={{ p: 2 }}>
+          <Typography variant='h6'>
+          YEAR 3 SEM 2
+          </Typography>
+          {modsY2S1 ? (
+                <ModuleList modules={modsY3S2} setModules={setModsY3S2} />
+            ) : (
+                <p>No Plan</p>
+            )}
+        </Card>
+        <p></p>
+        <Card sx={{ p: 2 }}>
+          <Typography variant='h6'>
+          YEAR 4 SEM 1
+          </Typography>
+          {modsY2S1 ? (
+                <ModuleList modules={modsY4S1} setModules={setModsY4S1} />
+            ) : (
+                <p>No Plan</p>
+            )}
+        </Card>
+        <p></p>
+        <Card sx={{ p: 2 }}>
+          <Typography variant='h6'>
+          YEAR 4 SEM 2
+          </Typography>
+          {modsY2S1 ? (
+                <ModuleList modules={modsY4S2} setModules={setModsY4S2} />
+            ) : (
+                <p>No Plan</p>
+            )}
+        </Card>
     <>
-    <Buttons/>
     </>
     </>
   );
