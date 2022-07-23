@@ -155,7 +155,7 @@ export default function Calculator() {
   return (
     <>
       <ThemeProvider theme={theme}>
-      <Grid container component="main" sx={{ height: '100vh' }}>
+      <Grid container component="main" sx={{ height: '100vh' }} data-testid="Calculator">
         <CssBaseline />
         <Grid
           item
@@ -194,6 +194,7 @@ export default function Calculator() {
                   style={{ margin: "0 1rem" }}
                   type="text"
                   value={addModuleText}
+                  data-testid="addmodule"
                   onChange={(event) => {
 
                         setAddModuleText(event.target.value);
