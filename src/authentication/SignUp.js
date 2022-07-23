@@ -92,7 +92,6 @@ export default function SignUp() {
       // Y1S1Confirmed: [''],
       Y1S1CAP: 0,
       Y1S1MC:0,
-      Y1S1MC:0,
 
       Y1S2Planned: [],
       // Y1S2Confirmed: [''],
