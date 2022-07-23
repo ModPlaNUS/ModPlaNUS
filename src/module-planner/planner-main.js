@@ -611,6 +611,8 @@ function addToList(code, grade, modCred, workHrs){
       // console.log(user.newMods.map(y=>y.code));
       const repetitive = planned.map(y=>y.code);
       const newMods = planned.concat(Module.filter(a => !repetitive.includes(a.code)));
+      const currMC = user.currentMC + MCtl;
+      const semMC = MCtl;
 
       const userNew = {
       email: user.email,
@@ -626,6 +628,7 @@ function addToList(code, grade, modCred, workHrs){
       Y1S1Planned: newMods,
       // Y1S1Confirmed: newConfirmed,
       Y1S1CAP: user.Y1S1CAP,
+      Y1S1MC: semMC,
 
       Y1S2Planned: user.Y1S2Planned,
       // Y1S2Confirmed: user.Y1S2Confirmed,
@@ -655,6 +658,7 @@ function addToList(code, grade, modCred, workHrs){
       // Y4S2Confirmed: user.Y4S2Confirmed,
       Y4S2CAP:user.Y4S2CAP,
 
+      currentMC: currMC,
       eligibleMods: user.eligibleMods.concat(eligibleMods).filter((v, i, a) => a.indexOf(v) === i),
       currentCAP: user.currentCAP,
       warnings:user.warnings.concat(warnings),
@@ -665,6 +669,8 @@ function addToList(code, grade, modCred, workHrs){
     if(ys==="YEAR 1 SEM 2"){
 
       const planned = user.Y1S2Planned;
+      const currMC = user.currentMC + MCtl;
+      const semMC = MCtl;
       // console.log(planned);
       // const confirmed = user.Y2S1Confirmed;
       // const newPlanned = planned.concat(mods).filter((v, i, a) => a.indexOf(v) === i);
@@ -693,6 +699,7 @@ function addToList(code, grade, modCred, workHrs){
       Y1S2Planned: newMods,
       // Y1S2Confirmed: newConfirmed,
       Y1S2CAP:user.Y1S2CAP,
+      Y1S2MC: semMC,
 
       Y2S1Planned: user.Y2S1Planned,
       // Y2S1Confirmed: user.Y2S1Confirmed,
@@ -718,6 +725,7 @@ function addToList(code, grade, modCred, workHrs){
       // Y4S2Confirmed: user.Y4S2Confirmed,
       Y4S2CAP:user.Y4S2CAP,
 
+      currentMC: currMC,
       eligibleMods: user.eligibleMods.concat(eligibleMods).filter((v, i, a) => a.indexOf(v) === i),
       currentCAP: user.currentCAP,
       warnings:user.warnings.concat(warnings),
@@ -727,6 +735,8 @@ function addToList(code, grade, modCred, workHrs){
     if(ys==="YEAR 2 SEM 1"){
 
       const planned = user.Y2S1Planned;
+      const currMC = user.currentMC + MCtl;
+      const semMC = MCtl;
       // console.log(planned);
       // const confirmed = user.Y2S1Confirmed;
       // const newPlanned = planned.concat(mods).filter((v, i, a) => a.indexOf(v) === i);
@@ -759,6 +769,7 @@ function addToList(code, grade, modCred, workHrs){
         Y2S1Planned: newMods,
         // Y2S1Confirmed: newConfirmed,
         Y2S1CAP:user.Y2S1CAP,
+        Y2S1MC: semMC,
   
         Y2S2Planned: user.Y2S2Planned,
         // Y2S2Confirmed: user.Y2S2Confirmed,
@@ -780,6 +791,7 @@ function addToList(code, grade, modCred, workHrs){
         // Y4S2Confirmed: user.Y4S2Confirmed,
         Y4S2CAP:user.Y4S2CAP,
   
+        currentMC: currMC,
         eligibleMods: user.eligibleMods.concat(eligibleMods).filter((v, i, a) => a.indexOf(v) === i),
         currentCAP: user.currentCAP,
         warnings:user.warnings.concat(warnings),
@@ -789,6 +801,8 @@ function addToList(code, grade, modCred, workHrs){
     if(ys==="YEAR 2 SEM 2"){
 
       const planned = user.Y2S2Planned;
+      const currMC = user.currentMC + MCtl;
+      const semMC = MCtl;
       // console.log(planned);
       // const confirmed = user.Y2S1Confirmed;
       // const newPlanned = planned.concat(mods).filter((v, i, a) => a.indexOf(v) === i);
@@ -824,6 +838,7 @@ function addToList(code, grade, modCred, workHrs){
         Y2S2Planned: newMods,
         // Y2S2Confirmed: new,
         Y2S2CAP:user.Y2S2CAP,
+        Y2S2MC: semMC,
   
         Y3S1Planned: user.Y3S1Planned,
         // Y3S1Confirmed: user.Y3S1Confirmed,
@@ -844,6 +859,7 @@ function addToList(code, grade, modCred, workHrs){
         eligibleMods: user.eligibleMods.concat(eligibleMods).filter((v, i, a) => a.indexOf(v) === i),
         currentCAP: user.currentCAP,
         warnings:user.warnings.concat(warnings),
+        currentMC: currMC,
         }
         await updateDoc(userDoc, userNew);
     }
@@ -857,6 +873,8 @@ function addToList(code, grade, modCred, workHrs){
       // console.log(user.newMods.map(y=>y.code));
       const repetitive = planned.map(y=>y.code);
       const newMods = planned.concat(Module.filter(a => !repetitive.includes(a.code)));
+      const currMC = user.currentMC + MCtl;
+      const semMC = MCtl;
 
       const userNew = {
         email: user.email,
@@ -888,6 +906,7 @@ function addToList(code, grade, modCred, workHrs){
         Y3S1Planned: newMods,
         // Y3S1Confirmed: newConfirmed,
         Y3S1CAP:user.Y3S1CAP,
+        Y3S1MC: semMC,
   
         Y3S2Planned: user.Y3S2Planned,
         // Y3S2Confirmed: user.Y3S2Confirmed,
@@ -904,11 +923,14 @@ function addToList(code, grade, modCred, workHrs){
         eligibleMods: user.eligibleMods.concat(eligibleMods).filter((v, i, a) => a.indexOf(v) === i),
         currentCAP: user.currentCAP,
         warnings:user.warnings.concat(warnings),
+        currentMC: currMC,
         }
         await updateDoc(userDoc, userNew);
     }
     if(ys==="YEAR 3 SEM 2"){
       const planned = user.Y3S2Planned;
+      const currMC = user.currentMC + MCtl;
+      const semMC = MCtl;
       // console.log(planned);
       // const confirmed = user.Y2S1Confirmed;
       // const newPlanned = planned.concat(mods).filter((v, i, a) => a.indexOf(v) === i);
@@ -951,6 +973,7 @@ function addToList(code, grade, modCred, workHrs){
         Y3S2Planned: newMods,
         // Y3S2Confirmed: newConfirmed,
         Y3S2CAP: user.Y3S2CAP,
+        Y3S2MC: semMC,
   
         Y4S1Planned: user.Y4S1Planned,
         // Y4S1Confirmed: user.Y4S1Confirmed,
@@ -963,11 +986,14 @@ function addToList(code, grade, modCred, workHrs){
         eligibleMods: user.eligibleMods.concat(eligibleMods).filter((v, i, a) => a.indexOf(v) === i),
         currentCAP: user.currentCAP,
         warnings:user.warnings.concat(warnings),
+        currentMC: currMC,
         }
         await updateDoc(userDoc, userNew);
     }
     if(ys==="YEAR 4 SEM 1"){
       const planned = user.Y4S1Planned;
+      const currMC = user.currentMC + MCtl;
+      const semMC = MCtl;
       // console.log(planned);
       // const confirmed = user.Y2S1Confirmed;
       // const newPlanned = planned.concat(mods).filter((v, i, a) => a.indexOf(v) === i);
@@ -1014,6 +1040,7 @@ function addToList(code, grade, modCred, workHrs){
         Y4S1Planned: newMods,
         // Y4S1Confirmed: newConfirmed,
         Y4S1CAP:user.Y4S1CAP,
+        Y4S1MC: semMC,
   
         Y4S2Planned: user.Y4S2Planned,
         // Y4S2Confirmed: user.Y4S2Confirmed,
@@ -1022,11 +1049,14 @@ function addToList(code, grade, modCred, workHrs){
         eligibleMods: user.eligibleMods.concat(eligibleMods).filter((v, i, a) => a.indexOf(v) === i),
         currentCAP: user.currentCAP,
         warnings:user.warnings.concat(warnings),
+        currentMC: currMC,
         }
         await updateDoc(userDoc, userNew);
     }
     if(ys==="YEAR 4 SEM 2"){
       const planned = user.Y4S2Planned;
+      const currMC = user.currentMC + MCtl;
+      const semMC = MCtl;
       // console.log(planned);
       // const confirmed = user.Y2S1Confirmed;
       // const newPlanned = planned.concat(mods).filter((v, i, a) => a.indexOf(v) === i);
@@ -1077,10 +1107,12 @@ function addToList(code, grade, modCred, workHrs){
         Y4S2Planned: newMods,
         // Y4S2Confirmed: newConfirmed,
         Y4S2CAP:user.Y4S2CAP,
+        Y4S2MC: semMC,
   
         eligibleMods: user.eligibleMods.concat(eligibleMods).filter((v, i, a) => a.indexOf(v) === i),
         currentCAP: user.currentCAP,
         warnings:user.warnings.concat(warnings),
+        currentMC: currMC,
         }
         await updateDoc(userDoc, userNew);
     }
