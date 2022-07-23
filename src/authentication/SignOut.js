@@ -61,7 +61,7 @@ export default function SignOut() {
               <LockOutlinedIcon />
             </Avatar>
             <Typography component="h1" variant="h5">
-              SignOut
+              Do You Want To Sign out? 
             </Typography>
             <Box
               component="form"
