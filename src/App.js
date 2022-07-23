@@ -18,7 +18,7 @@ import './App.css';
 import SignUp from './authentication/SignUp';
 import SignIn from './authentication/SignIn';
 import SignOut from './authentication/SignOut';
-import {BrowserRouter as Router, Routes, Route, useLocation} from 'react-router-dom';
+import {BrowserRouter as Router, Routes, Route, useLocation, BrowserRouter} from 'react-router-dom';
 import Home from './homepage/Home';
 import Planner from './module-planner/planner-main';
 import Calculator from './cap-calculator/calculator';

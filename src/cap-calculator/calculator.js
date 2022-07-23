@@ -18,6 +18,14 @@ import 'firebase/compat/auth';
 import 'firebase/compat/database';
 import DeleteIcon from '@mui/icons-material/Delete';
 import SaveIcon from '@mui/icons-material/Save';
+import { db } from '../authentication/firebase-config';
+import {
+  onSnapshot,
+  updateDoc,
+  doc,
+  update,
+} from "firebase/firestore";
+import '@firebase/firestore'
 var temp;
 
 
@@ -31,10 +39,36 @@ export default function Calculator() {
   const [credits, setCredits] = useState(0);
   const [mc, setMC] = useState(0);
   const [addModuleText, setAddModuleText] = useState("");
-  const [cmc, setCMC] = useState(20);
-  const [cap, setCap] = useState(5);
+  const [cmc, setCMC] = useState(0);
+  const [cap, setCap] = useState(0);
   const [firstName, setFirstName] = useState('');
   const [lastName, setLastName] = useState('');
+  const [userInfo, setUserInfo] = useState([]);
+
+  function getInfo(){
+    if(firebase.auth().currentUser){
+
+      const user = onSnapshot(doc(db, "users", firebase.auth().currentUser.uid), 
+       (doc) => {
+        //console.log(doc.data());
+         setUserInfo(doc.data());
+        });
+        return user;
+      } else {
+      //  console.log("no info");
+      }
+  }
+
+  React.useEffect(()=>{getInfo()}, []);
+  React.useEffect(()=>{
+    if(userInfo.currentMC){
+    setCMC(userInfo.currentMC);
+    setCap(userInfo.currentCAP);
+    } else {
+      setCMC(0);
+    setCap(userInfo.currentCAP);
+    }
+  }, [userInfo]);
 
   function handleAddModule(event) {
     // React honours default browser behavior and the
@@ -43,7 +77,10 @@ export default function Calculator() {
     // default behaviour here as we don't want to refresh
     event.preventDefault();
     addModule(addModuleText, addGradeText, addMC);
-    console.log(addModuleText);
+    console.log('hiii');
+    console.log(cap);
+    console.log(cmc);
+    console.log(mc);
   }
 
   function addModule(description, desc, des) {
@@ -71,42 +108,28 @@ export default function Calculator() {
     //setS(newNew);
   }
 
-  const database = firebase.database();
-
-  const handleSubmit = (e) => {
-    //console.log(user?.email);
-    e.preventDefault();
-    // const users = firebase.database().ref('User');
-   // const currUserEmail = firebase.auth().currentUser.email;
-    
-   const currUser = firebase.auth().currentUser;
-   //console.log('HIII' + currUser.name);
-   database.ref('/cap/'+ firstName + lastName).set(
-    {
-      firstName : firstName,
-      lastName : lastName,
-      Module : Module,
-      Grade : addGradeText,
-      cap: (credits + (cap*cmc)) / (mc + cmc)
-    }).then(() => {
-      window.alert('user cap information added to database!');
-    })
-    .catch(error => {
-      console.error(error);
-    });
-
-    //users.push(user);
+  const updateUser = async (id) => {
+    const userDoc = doc(db, "users", id);
+    const newCAP = ((credits + (cap*cmc)) / (mc + cmc)).toFixed(2);
+    const userNew = {
+      currentCAP: newCAP,
+    }
+    await updateDoc(userDoc, userNew);
+    // const res = await userDoc.update({firstName: firstName});
   };
 
-  // const deleteProfile = () => {
-  //   database.ref('/cap/').child(firstName + lastName).remove()
-  //   .then(() => {
-  //     window.alert('user cap information removed from database!');
-  //   })
-  //   .catch(error => {
-  //     console.error(error);
-  //   });
-  // };
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    if(firebase.auth().currentUser.uid){
+    updateUser(firebase.auth().currentUser.uid);  
+    } else {
+      alert("Please Log In!");
+    }
+
+
+  }
+
+  const database = firebase.database();
 
   function ComputeC(grade) {
     if (grade === "A+" || grade === "A") {
@@ -182,22 +205,22 @@ export default function Calculator() {
             }}
           >
             <Typography component="h1" variant="h5">
-              CAP Calculator!
+              CAP Calculator
             </Typography>
             <Box component="form" noValidate sx={{ mt: 1 }}
 >
             <h2>Add Data</h2>
             <form onSubmit={handleAddModule}>
+              <Typography>
               Module Name
+              </Typography>
               <label>
                 <Input
                   style={{ margin: "0 1rem" }}
                   type="text"
                   value={addModuleText}
                   onChange={(event) => {
-
                         setAddModuleText(event.target.value);
-
                   }
                   }
                 />
@@ -205,7 +228,9 @@ export default function Calculator() {
             </form>
             <p> </p>
             <FormControl variant="standard" sx={{ m: 1, minWidth: 275 }} onSubmit={handleAddModule}>
-              <InputLabel id="demo-simple-select-standard-label"> Grade </InputLabel>
+            <Typography>
+             Grade
+            </Typography>
               <Select
                 labelId="demo-simple-select-standard-label"
                 id="demo-simple-select-standard"
@@ -215,7 +240,7 @@ export default function Calculator() {
                   temp = event.target.value; 
                   setAddGradeText(event.target.value);
                 }}
-                label="Grade"
+                // label="Grade"
               >
                 <MenuItem value="">
                 </MenuItem>
@@ -236,7 +261,9 @@ export default function Calculator() {
             </FormControl>
             <p> </p>
             <form onSubmit={handleAddModule}>
-              Input MC
+            <Typography>
+              Module Credits (MC)
+            </Typography>
               <label>
                 <Input
                   style={{ margin: "0 1rem" }}
@@ -261,7 +288,7 @@ export default function Calculator() {
           </Box>
 
           <Box>
-            <h2>Data of all modules</h2>
+            <h2>Calculate Here!</h2>
             <table style={{ margin: "0 auto", width: "100%" }}>
               <thead>
                 <tr>
@@ -269,7 +296,7 @@ export default function Calculator() {
                   <th>Modules</th>
                   <th>Grade</th>
                   <th>MC</th>
-                  <th>MC*GP</th>
+                  <th>Score</th>
                 </tr>
               </thead>
               <tbody>
@@ -284,8 +311,8 @@ export default function Calculator() {
                 ))}
               </tbody>
             </table>
-            <h4>Cummulative CAP is: {cap}</h4>
-            <h4>CAP is: {(credits + (cap*cmc)) / (mc + cmc)}</h4>
+            <h4>New CAP is: {((credits + (cap*cmc)) / (mc + cmc)).toFixed(2)}</h4>
+            <h4>Current CAP is: {cap}</h4>
 
             <Grid item xs={12} m={5}>
             <Button variant="contained" 
