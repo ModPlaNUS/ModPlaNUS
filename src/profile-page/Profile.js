@@ -16,6 +16,7 @@ import {
   onSnapshot,
   updateDoc,
   doc,
+  update,
 } from "firebase/firestore";
 import '@firebase/firestore'
 
@@ -45,17 +46,27 @@ export default function Profile() {
     if(firebase.auth().currentUser){
 
       const user = onSnapshot(doc(db, "users", firebase.auth().currentUser.uid), 
-      (doc) => {
+       (doc) => {
         //console.log(doc.data());
-        setUserInfo(doc.data());
+         setUserInfo(doc.data());
         });
         return user;
       } else {
-       console.log("no info");
+      //  console.log("no info");
       }
   }
 
   React.useEffect(()=>{getInfo()}, []);
+  React.useEffect(()=>{
+    setOtherProgrammes(userInfo.otherProgrammes);
+    setMinor(userInfo.minor);
+    setMajor(userInfo.major);
+    setSemester(userInfo.semester);
+    setYear(userInfo.year);
+    setDisplayName(userInfo.displayName);
+    setLastName(userInfo.lastName);
+    setFirstName(userInfo.firstName);
+  }, [userInfo])
   const user = firebase.auth().currentUser;
 
   const deleteUser = () => {
@@ -79,6 +90,7 @@ export default function Profile() {
       otherProgrammes: otherProgrammes,
     }
     await updateDoc(userDoc, userNew);
+    // const res = await userDoc.update({firstName: firstName});
   };
 
   const goTo = useNavigate();
@@ -88,6 +100,8 @@ export default function Profile() {
   };
 
   const auth = getAuth();
+
+  const emailStr = userInfo.email;
   
 
   return (
@@ -118,9 +132,8 @@ export default function Profile() {
             name="email"
             value={userInfo.email}
             fullWidth
-            autoComplete="display-name"
+            autoComplete="email"
             variant="outlined"
-            onChange={(e) => setDisplayName(e.target.value)}
           />
         </Grid>
       <Grid item xs={12} sm={6} m={5}>
@@ -134,7 +147,7 @@ export default function Profile() {
             id="firstName"
             name="firstName"
             fullWidth
-            value={userInfo.firstName}
+            value={firstName}
             autoComplete="given-name"
             variant="outlined"
             onChange={(e) => {setFirstName(e.target.value)}}
@@ -150,7 +163,7 @@ export default function Profile() {
             required
             id="lastName"
             name="lastName"
-            value={userInfo.lastName}
+            value={lastName}
             fullWidth
             autoComplete="family-name"
             variant="outlined"
@@ -167,7 +180,7 @@ export default function Profile() {
             required
             id="displayName"
             name="displayName"
-            value={userInfo.displayName}
+            value={displayName}
             fullWidth
             autoComplete="display-name"
             variant="outlined"
@@ -183,7 +196,7 @@ export default function Profile() {
             required
             id="year"
             name="year"
-            value={userInfo.year}
+            value={year}
             fullWidth
             autoComplete="year"
             variant="outlined"
@@ -199,7 +212,7 @@ export default function Profile() {
             required
             id="semester"
             name="semester"
-            value={userInfo.semester}
+            value={semester}
             fullWidth
             variant="outlined"
             onChange={(e) => setSemester(e.target.value)}
@@ -214,7 +227,7 @@ export default function Profile() {
             required
             id="major"
             name="major"
-            value={userInfo.major}
+            value={major}
             fullWidth
             autoComplete="major"
             variant="outlined"
@@ -229,7 +242,7 @@ export default function Profile() {
           <TextField
             id="minor"
             name="minor"
-            value={userInfo.minor}
+            value={minor}
             fullWidth
             autoComplete="minor"
             variant="outlined"
@@ -244,7 +257,7 @@ export default function Profile() {
           <TextField
             id="other programmes"
             name="other programmes"
-            value={userInfo.otherProgrammes}
+            value= {otherProgrammes}
             fullWidth
             autoComplete="other programmes"
             variant="outlined"

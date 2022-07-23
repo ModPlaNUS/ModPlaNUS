@@ -88,42 +88,50 @@ export default function SignUp() {
       year: year,
       semester: semester,
       otherProgrammes: otherProgrammes,
-
-      Y1S1Planned: [''],
-      Y1S1Confirmed: [''],
+      Y1S1Planned: [],
+      // Y1S1Confirmed: [''],
       Y1S1CAP: 0,
+      Y1S1MC:0,
 
-      Y1S2Planned: [''],
-      Y1S2Confirmed: [''],
+      Y1S2Planned: [],
+      // Y1S2Confirmed: [''],
       Y1S2CAP:0,
+      Y1S2MC:0,
 
-      Y2S1Planned: [''],
-      Y2S1Confirmed: [''],
+      Y2S1Planned: [],
+      // Y2S1Confirmed: [''],
       Y2S1CAP:0,
+      Y2S1MC:0,
 
-      Y2S2Planned: [''],
-      Y2S2Confirmed: [''],
+      Y2S2Planned: [],
+      // Y2S2Confirmed: [''],
       Y2S2CAP:0,
+      Y2S2MC:0,
 
-      Y3S1Planned: [''],
-      Y3S1Confirmed: [''],
+      Y3S1Planned: [],
+      // Y3S1Confirmed: [''],
       Y3S1CAP:0,
+      Y3S1MC:0,
 
-      Y3S2Planned: [''],
-      Y3S2Confirmed: [''],
+      Y3S2Planned: [],
+      // Y3S2Confirmed: [''],
       Y3S2CAP:0,
+      Y3S2MC:0,
 
-      Y4S1Planned: [''],
-      Y4S1Confirmed: [''],
+      Y4S1Planned: [],
+      // Y4S1Confirmed: [''],
       Y4S1CAP:0,
+      Y4S1MC:0,
 
-      Y4S2Planned: [''],
-      Y4S2Confirmed: [''],
+      Y4S2Planned: [],
+      // Y4S2Confirmed: [''],
       Y4S2CAP:0,
+      Y4S2MC:0,
 
       eligibleMods: [''],
       currentCAP: 0,
-      warnings:[''],
+      currentMC: 0,
+      warnings: [''],
     }
 
     setSignUpEmail(email);
@@ -135,7 +143,11 @@ export default function SignUp() {
     setSignUpSemester(semester);
     setSignUpOtherProgrammes(otherProgrammes);
     setSignUpDisplayName(displayName);
+    if(email && firstName && lastName && displayName && major && year && semester && password){
     signup(email, password, user);
+    } else {
+      alert("Please enter all mandatory fields!");
+    }
   };
 
   return (
@@ -207,7 +219,7 @@ export default function SignUp() {
                   label="Password"
                   type="password"
                   id="password"
-                  autoComplete="new-password"
+                  autoComplete="password"
                 />
               </Grid>
               <Grid item xs={12}>
@@ -242,7 +254,6 @@ export default function SignUp() {
               </Grid>
               <Grid item xs={12} sm={6}>
                 <TextField
-                  required
                   fullWidth
                   id="minor"
                   label="Minor"
@@ -252,7 +263,6 @@ export default function SignUp() {
               </Grid>
               <Grid item xs={12} sm={6}>
                 <TextField
-                  required
                   fullWidth
                   id="otherProgrammes"
                   label="Other Programmes"

@@ -104,12 +104,16 @@ export default function SignIn() {
             <Typography component="h1" variant="h5">
               Sign in
             </Typography>
-            <Box component="form" noValidate onSubmit={handleSubmit} sx={{ mt: 1 }}>
+            <Box component="form" noValidate onSubmit={handleSubmit} sx={{ mt: 1 }}  data-testid = "formSignIn">
               <TextField
                 margin="normal"
                 required
                 fullWidth
+                role="getEmail"
+                onChange={event => setSignInEmail(event.target.value)}
+                inputProps={{ "data-testid": "email-input" }}
                 id="email"
+                value={signInEmail}
                 label="Email Address"
                 name="email"
                 autoComplete="email"
@@ -126,9 +130,9 @@ export default function SignIn() {
                 autoComplete="current-password"
               />
               <Button
-                role = "button"
                 type="submit"
                 fullWidth
+                data-testid = "buttonSignIn"
                 variant="contained"
                 sx={{ mt: 3, mb: 2 }}
               >
