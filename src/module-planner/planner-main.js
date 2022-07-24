@@ -347,7 +347,7 @@ React.useEffect(
       setPreclusionMods(precMods);
       if(mods.some(element => {
         return precMods.includes(element);})){
-        const msg = "PRECLUSIONS ERRORS: Did you finish this preclusions condition? " + preclusions;
+        const msg = code + " PRECLUSIONS ERRORS: Did you accidentally add these preclusion modules? " + preclusions;
 
         const newWarnings = [
           ...warnings,
@@ -370,10 +370,11 @@ React.useEffect(
     if(corequisites){
       coreqMods = corequisites.match(res);
       setCorequisiteMods(coreqMods);
-      if(coreqMods.every(element => {
+      if(!coreqMods.every(element => {
+        console.log(mods.includes(element));
         return mods.includes(element);
       })){
-        const msg = "COREQUISITE ERRORS: Did you finish this corequisite condition? " + corequisites;
+        const msg = code + " COREQUISITE ERROR: Have you remembered to add these corequisite modules? " + corequisites;
 
         const newWarnings = [
           ...warnings,
@@ -420,7 +421,7 @@ React.useEffect(
       if(!eligibleMods.includes(code)){
         if(!vari){
         
-          const msg = "PREREQUISITE ERRORS: Did you finish this prerequisite condition? " + prerequisites;
+          const msg = code + " PREREQUISITE ERRORS: Are you sure you have finished these prerequisite modules? " + prerequisites;
           // console.log(msg);
           
           const newWarnings = [
@@ -434,7 +435,7 @@ React.useEffect(
         setWarnings(newWarnings);
 
       } else {
-        setWarnings("WARNING: Our pgm detected one or more of the following prerequisites to be unfulfilled! " + prerequisites)
+        setWarnings(code + " WARNING: Our program detected one or more of the following prerequisites to be unfulfilled! " + prerequisites)
       }
     }
   }

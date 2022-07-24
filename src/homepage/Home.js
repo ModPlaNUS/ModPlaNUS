@@ -42,6 +42,25 @@ export function ModuleList(props) {
 
   }
 
+  function handleModuleDeletion(toToggleModule, toToggleModuleIndex) {
+    // console.log(toToggleModule);
+    let newModules = [
+      ...modules.slice(0, toToggleModuleIndex),
+      {
+        code: toToggleModule.code,
+        grade: toToggleModule.grade,
+        mc: toToggleModule.mc,
+        workLoad: toToggleModule.workLoad,
+        isComplete: !toToggleModule.isComplete,
+      },
+      ...modules.slice(toToggleModuleIndex + 1)
+    ];
+
+    newModules = newModules.filter((w, i)=> !w.isComplete);
+    setModules(newModules);
+
+  }
+
   return (
     <table style={{ margin: "0 auto", width: "100%" }}>
           <thead>
@@ -51,6 +70,7 @@ export function ModuleList(props) {
               <th>Grade</th>
               <th>MC</th>
               <th>Completed</th>
+              <th>Delete</th>
             </tr>
           </thead>
           <tbody>
@@ -65,6 +85,12 @@ export function ModuleList(props) {
                     type="checkbox"
                     checked={mods.isComplete}
                     onChange={() => handleModuleCompletionToggled(mods, index)}
+                  />
+                </td>
+                <td>
+                  <input
+                    type="button"
+                    onClick={() => handleModuleDeletion(mods, index)}
                   />
                 </td>
               </tr>
@@ -133,6 +159,31 @@ export default function Home() {
 
     }
 
+    const updateProfile = async (id) =>{
+      const userDoc = doc(db, "users", id);
+      const userNew = {
+        Y1S1Planned: modsY1S1,
+        Y1S2Planned: modsY1S2,
+        Y2S1Planned: modsY2S1,
+        Y2S2Planned: modsY2S2,
+        Y3S1Planned: modsY3S1,
+        Y3S2Planned: modsY3S2,
+        Y4S1Planned: modsY4S1,
+        Y4S2Planned: modsY4S2,
+      }
+      await updateDoc(userDoc, userNew);
+    
+    }
+
+    function handleSubmit(e){
+      e.preventDefault();
+      if(firebase.auth().currentUser){
+      updateProfile(firebase.auth().currentUser.uid);
+      } else {
+        //alert...
+      }
+    }
+
   return (
     <>
     <Card sx={{ maxWidth: 3450,  margin: 2 }}>
@@ -157,6 +208,15 @@ export default function Home() {
             ) : (
                 <p>No Plan</p>
             )}
+            <Button
+                type="submit"
+                fullWidth
+                variant="contained"
+                sx={{ mt: 3, mb: 2 }}
+                onClick={handleSubmit}
+              >
+                Save Changes
+              </Button>
         </Card>
         <p></p>
         <Card sx={{ p: 2 }}>
@@ -168,6 +228,15 @@ export default function Home() {
             ) : (
                 <p>No Plan</p>
             )}
+            <Button
+                type="submit"
+                fullWidth
+                variant="contained"
+                sx={{ mt: 3, mb: 2 }}
+                onClick={handleSubmit}
+              >
+                Save Changes
+              </Button>
         </Card>
         <p></p>
         <Card sx={{ p: 2 }}>
@@ -179,6 +248,16 @@ export default function Home() {
             ) : (
                 <p>No Plan</p>
             )}
+            <p></p>
+            <Button
+                type="submit"
+                fullWidth
+                variant="contained"
+                sx={{ mt: 3, mb: 2 }}
+                onClick={handleSubmit}
+              >
+                Save Changes
+              </Button>
         </Card>
         <p></p>
         <Card sx={{ p: 2 }}>
@@ -190,6 +269,15 @@ export default function Home() {
             ) : (
                 <p>No Plan</p>
             )}
+            <Button
+                type="submit"
+                fullWidth
+                variant="contained"
+                sx={{ mt: 3, mb: 2 }}
+                onClick={handleSubmit}
+              >
+                Save Changes
+              </Button>
         </Card>
         <p></p>
         <Card sx={{ p: 2 }}>
@@ -201,6 +289,15 @@ export default function Home() {
             ) : (
                 <p>No Plan</p>
             )}
+            <Button
+                type="submit"
+                fullWidth
+                variant="contained"
+                sx={{ mt: 3, mb: 2 }}
+                onClick={handleSubmit}
+              >
+                Save Changes
+              </Button>
         </Card>
         <p></p>
         <Card sx={{ p: 2 }}>
@@ -212,6 +309,15 @@ export default function Home() {
             ) : (
                 <p>No Plan</p>
             )}
+            <Button
+                type="submit"
+                fullWidth
+                variant="contained"
+                sx={{ mt: 3, mb: 2 }}
+                onClick={handleSubmit}
+              >
+                Save Changes
+              </Button>
         </Card>
         <p></p>
         <Card sx={{ p: 2 }}>
@@ -223,6 +329,15 @@ export default function Home() {
             ) : (
                 <p>No Plan</p>
             )}
+            <Button
+                type="submit"
+                fullWidth
+                variant="contained"
+                sx={{ mt: 3, mb: 2 }}
+                onClick={handleSubmit}
+              >
+                Save Changes
+              </Button>
         </Card>
         <p></p>
         <Card sx={{ p: 2 }}>
@@ -234,6 +349,15 @@ export default function Home() {
             ) : (
                 <p>No Plan</p>
             )}
+            <Button
+                type="submit"
+                fullWidth
+                variant="contained"
+                sx={{ mt: 3, mb: 2 }}
+                onClick={handleSubmit}
+              >
+                Save Changes
+              </Button>
         </Card>
     <>
     </>

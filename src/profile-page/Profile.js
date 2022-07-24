@@ -112,12 +112,6 @@ export default function Profile() {
 
 <p></p>
 
-      <Typography variant="p" gutterBottom>
-      Your Display Name is how you shall appear to others. Please enter your year of study for the current/upcoming academic year in the format 'YEAR X'
-        (e.g. YEAR 1, YEAR 2, etc.). Similarly, enter your Semester of study as 'SEMESTER 1' or 'SEMESTER 2'.
-      </Typography>
-      <Typography>{userInfo.email}</Typography>
-
 <p></p>
 
 <Grid item xs={12} sm={6} m={5}>
@@ -127,13 +121,13 @@ export default function Profile() {
       <p></p>
           <TextField
           disabled
-            
             id="email"
             name="email"
             value={userInfo.email}
             fullWidth
             autoComplete="email"
             variant="outlined"
+            helperText="You can not edit this field"
           />
         </Grid>
       <Grid item xs={12} sm={6} m={5}>
@@ -182,6 +176,7 @@ export default function Profile() {
             name="displayName"
             value={displayName}
             fullWidth
+            helperText="You will be visible to other users as this"
             autoComplete="display-name"
             variant="outlined"
             onChange={(e) => setDisplayName(e.target.value)}
@@ -198,6 +193,7 @@ export default function Profile() {
             name="year"
             value={year}
             fullWidth
+            helperText="Current year of study"
             autoComplete="year"
             variant="outlined"
             onChange={(e) => setYear(e.target.value)}
@@ -214,6 +210,7 @@ export default function Profile() {
             name="semester"
             value={semester}
             fullWidth
+            helperText="Current semester of study"
             variant="outlined"
             onChange={(e) => setSemester(e.target.value)}
           />
@@ -259,6 +256,7 @@ export default function Profile() {
             name="other programmes"
             value= {otherProgrammes}
             fullWidth
+            helperText="Such as USP, Doube Major, etc."
             autoComplete="other programmes"
             variant="outlined"
             onChange={(e) => setOtherProgrammes(e.target.value)}

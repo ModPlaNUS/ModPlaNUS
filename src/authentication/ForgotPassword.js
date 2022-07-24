@@ -12,6 +12,7 @@ export default function ForgotPassword(){
     
     const forgotPassword = (Email) => {
 
+      if(Email){
       console.log("reset email sent to " + Email);
       sendPasswordResetEmail(auth, Email, null)
           .then(() => {
@@ -21,6 +22,7 @@ export default function ForgotPassword(){
               console.log(e);
               alert(e.message);
           });
+        }
   };
 
 const handleSubmit = (email) => {
@@ -32,15 +34,15 @@ return (
     <div>
         <Card>
         <Typography variant="h3">
-            Forgot Password
+            Email
             </Typography>
            <p></p>
            <TextField           
-            id="newPassword"
-            name="newPassword"
-            placeholder="Enter Your New Password"
+            id="email"
+            name="email"
+            placeholder="Enter Your Email"
             fullWidth
-            autoComplete="password"
+            autoComplete="email"
             variant="outlined"
             onChange={(e) => setEmail(e.target.value)}
           />
