@@ -69,6 +69,7 @@ export default function SignUp() {
     const data = new FormData(event.currentTarget);
     const email = data.get('email');
     const password = data.get('password');
+    const confirmpassword = data.get('confirmpassword');
     const firstName = data.get('firstName');
     const lastName = data.get('lastName');
     const major = data.get('major');
@@ -143,8 +144,12 @@ export default function SignUp() {
     setSignUpSemester(semester);
     setSignUpOtherProgrammes(otherProgrammes);
     setSignUpDisplayName(displayName);
-    if(email && firstName && lastName && displayName && major && year && semester && password){
-    signup(email, password, user);
+    if(email && firstName && lastName && displayName && major && year && semester && password && confirmpassword){
+      if(confirmpassword==password){
+        signup(email, password, user);
+      } else {
+        alert("Please make sure your passwords match!");
+      }
     } else {
       alert("Please enter all mandatory fields!");
     }
@@ -219,6 +224,17 @@ export default function SignUp() {
                   label="Password"
                   type="password"
                   id="password"
+                  autoComplete="password"
+                />
+              </Grid>
+              <Grid item xs={12}>
+                <TextField
+                  required
+                  fullWidth
+                  name="confirmpassword"
+                  label="Confirm Password"
+                  type="password"
+                  id="confirmpassword"
                   autoComplete="password"
                 />
               </Grid>
