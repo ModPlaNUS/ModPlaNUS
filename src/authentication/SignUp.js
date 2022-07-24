@@ -147,7 +147,7 @@ export default function SignUp() {
     if(email && firstName && lastName && displayName && major && year && semester && password && confirmpassword){
       if(confirmpassword==password){
         signup(email, password, user);
-      } else {
+      } else { 
         alert("Please make sure your passwords match!");
       }
     } else {
