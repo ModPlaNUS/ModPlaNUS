@@ -347,7 +347,7 @@ React.useEffect(
       setPreclusionMods(precMods);
       if(mods.some(element => {
         return precMods.includes(element);})){
-        const msg = "PRECLUSIONS ERRORS: Did you finish this preclusions condition? " + preclusions;
+        const msg = "PRECLUSIONS ERRORS: Did you accidentally add these preclusions? " + preclusions;
 
         const newWarnings = [
           ...warnings,
@@ -370,7 +370,8 @@ React.useEffect(
     if(corequisites){
       coreqMods = corequisites.match(res);
       setCorequisiteMods(coreqMods);
-      if(coreqMods.every(element => {
+      if(!coreqMods.every(element => {
+        console.log(mods.includes(element));
         return mods.includes(element);
       })){
         const msg = "COREQUISITE ERRORS: Did you finish this corequisite condition? " + corequisites;
