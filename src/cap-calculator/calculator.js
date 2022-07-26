@@ -61,8 +61,8 @@ export default function Calculator() {
 
   React.useEffect(()=>{getInfo()}, []);
   React.useEffect(()=>{
-    if(userInfo.currentMC){
-    setCMC(userInfo.currentMC);
+    if(userInfo.currentCAPMC){
+    setCMC(userInfo.currentCAPMC);
     setCap(userInfo.currentCAP);
     } else {
       setCMC(0);
@@ -113,6 +113,7 @@ export default function Calculator() {
     const newCAP = ((credits + (cap*cmc)) / (mc + cmc)).toFixed(2);
     const userNew = {
       currentCAP: newCAP,
+      currentCAPMC: mc + cmc
     }
     await updateDoc(userDoc, userNew);
     // const res = await userDoc.update({firstName: firstName});
