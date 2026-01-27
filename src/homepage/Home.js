@@ -1,8 +1,6 @@
 import * as React from 'react';
 import Card from '@mui/material/Card';
-import CardActions from '@mui/material/CardActions';
 import CardContent from '@mui/material/CardContent';
-import CardMedia from '@mui/material/CardMedia';
 import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 import { auth } from '../authentication/firebase-config';
@@ -14,17 +12,14 @@ import {
   onSnapshot,
   updateDoc,
   doc,
-  update,
 } from "firebase/firestore";
 import '@firebase/firestore'
-import { Box } from '@mui/system';
 
 export function ModuleList(props) {
   
   const { modules, setModules } = props;
 
   function handleModuleCompletionToggled(toToggleModule, toToggleModuleIndex) {
-    // console.log(toToggleModule);
     let newModules = [
       ...modules.slice(0, toToggleModuleIndex),
       {
@@ -37,13 +32,11 @@ export function ModuleList(props) {
       ...modules.slice(toToggleModuleIndex + 1)
     ];
 
-    // newModules = newModules.filter((w, i)=> !w.isComplete);
     setModules(newModules);
 
   }
 
   function handleModuleDeletion(toToggleModule, toToggleModuleIndex) {
-    // console.log(toToggleModule);
     let newModules = [
       ...modules.slice(0, toToggleModuleIndex),
       {
@@ -121,12 +114,10 @@ export default function Home() {
 
       const user = onSnapshot(doc(db, "users", firebase.auth().currentUser.uid), 
        (doc) => {
-        //console.log(doc.data());
          setUserInfo(doc.data());
         });
         return user;
       } else {
-      //  console.log("no info");
       }
   }
 
@@ -146,7 +137,6 @@ export default function Home() {
     const currUser = () => {
       if(auth.currentUser){
             let user = auth.currentUser;
-            // console.log(mods);
                return (
                    <p> Hello {user.email} </p>
                );
@@ -180,7 +170,6 @@ export default function Home() {
       if(firebase.auth().currentUser){
       updateProfile(firebase.auth().currentUser.uid);
       } else {
-        //alert...
       }
     }
 

@@ -6,18 +6,14 @@ import TextField from '@mui/material/TextField';
 import Autocomplete from '@mui/material/Autocomplete';
 import PlannerMain from './PlannerMain.css';
 import Typography from '@mui/material/Typography';
-import { useNavigate } from "react-router-dom";
 import Grid from '@mui/material/Grid';
-import Input from '@mui/material/Input';
 import 'firebase/compat/auth';
 import 'firebase/compat/database';
-import DeleteIcon from '@mui/icons-material/Delete';
 import SaveIcon from '@mui/icons-material/Save';
 import { createFilterOptions } from "@mui/material/Autocomplete";
 import firebase from 'firebase/compat/app';
 import { db } from "../authentication/firebase-config";
 import {
-  setDoc,
   doc,
   onSnapshot, 
   updateDoc,
@@ -88,7 +84,6 @@ export function evaluate(finalArr) {
       stack.push(evaluation)
     }
   }
-  // console.log("hihihiih");
   return stack.pop();
 
 }
@@ -148,7 +143,6 @@ export function ModuleList(props) {
   const { modules, setModules } = props;
 
   function handleModuleCompletionToggled(toToggleModule, toToggleModuleIndex) {
-    // console.log(toToggleModule);
     let newModules = [
       ...modules.slice(0, toToggleModuleIndex),
       {
@@ -161,13 +155,11 @@ export function ModuleList(props) {
       ...modules.slice(toToggleModuleIndex + 1)
     ];
 
-    // newModules = newModules.filter((w, i)=> !w.isComplete);
     setModules(newModules);
 
   }
 
   function handleModuleDeletion(toToggleModule, toToggleModuleIndex) {
-    // console.log(toToggleModule);
     let newModules = [
       ...modules.slice(0, toToggleModuleIndex),
       {
@@ -271,21 +263,14 @@ export default function Planner() {
    const userCurr = firebase.auth().currentUser;
 
 
-
   //string of module planned seperated by semicolon
   let modsPlanned = "";
-  
-  //set of eligible modules the student is allowed to take (all the preliminary modules are added here)
-  //let eligibleMods = ['CS1101S', 'MA1521', 'CS1231S'];
-
 
   //the list of warnings to be displayed to user
   const [warnings, setWarnings] = React.useState([]);
 
   //a cariable to conduct trials with
   const [p, setP] = React.useState('');
-
-
 
 
 //for when the page renders to help set the options for autocomplete
@@ -298,7 +283,6 @@ React.useEffect(
   
 
  function findMC(code){
-  // console.log("hiii");
     const response = fetch(`${API_MODULE_INFO}${code}.json`)
     .then(res => res.json())
     .then(res => {
@@ -309,7 +293,6 @@ React.useEffect(
   };
 
   function findWL(code){
-    // console.log("hiii");
       const response = fetch(`${API_MODULE_INFO}${code}.json`)
       .then(res => res.json())
       .then(res => {
@@ -317,23 +300,13 @@ React.useEffect(
       });
     
     };
-
-  // React.useEffect(()=>{
-  //   console.log("noww");
-  //   console.log(mcs);
-  // }, [mcs])
   
   React.useEffect(()=>{
 
     if(p){
 
     const code = p.moduleCode;
-    // setModCode(code);
     const mc = p.moduleCredit;
-    // console.log(p.workload);
-    // setMC(mc);
-    // console.log(p);
-    // console.log(MC);
     const res = new RegExp(/(\b[A-Z0-9][A-Z0-9]+|\b[A-Z]\b)/g);
     const mods = Module.map(x => x.code);
 
@@ -400,9 +373,6 @@ React.useEffect(
     const prereqArr4 = prereqArr3.replaceAll(")", " BC ");
     const prereqArr = prereqArr4.match(res);
 
-    // console.log("HIII");
-    // console.log(prereqArr);
-
     let finalArray = prereqArr.map(x=>{
       if(x!=="BO" && x !=="BC" && x!=="AND" && x!== "OR" && x!=="TRUE"){
         return mods.includes(x);
@@ -414,15 +384,12 @@ React.useEffect(
       }
     });
 
-    // console.log(finalArray);
     const vari = evaluate(finalArray);
-    // console.log(vari);
     
       if(!eligibleMods.includes(code)){
         if(!vari){
         
           const msg = code + " PREREQUISITE ERRORS: Are you sure you have finished these prerequisite modules? " + prerequisites;
-          // console.log(msg);
           
           const newWarnings = [
             ...warnings,
@@ -444,26 +411,17 @@ React.useEffect(
      if(fulfillReqs){
        let newEligibleMods = eligibleMods.concat(fulfillReqs).filter((v, i, a) => a.indexOf(v) === i);
        setEligibleMods(newEligibleMods);
-       //userInfo.eligibleMods = eligibleMods;
      }
 
-     //addToList(code); 
 }
   
 }, [p]);
 
-// React.useEffect(()=>{
-//   userInfo.eligibleMods = eligibleMods;
-//   userInfo.plannedMods = Module.map(x=>x.code);
-//   userInfo.warnings = warnings;
-//   updateUser(user.uid);
-// }, [warnings, eligibleMods, Module])
 
   React.useEffect(()=>{
 
     const code = modCode;
     const mods = Module.map(x => x.code);
-    // console.log(mc);
 
     setContainsPrecs(
       mods.some(element => {
@@ -481,16 +439,9 @@ React.useEffect(
       eligibleMods.includes(code)
     );
 
-    // setMC(p.moduleCredit);
 
 
   }, [eligibleMods, corequisiteMods, preclusionMods])
-
-  // React.useEffect(()=>{
-  //   const newTl = MCtl + MC;
-  //   setMCtl(newTl);
-  // }, [MC])
-
 
 //retrieve data regarding the module
 function handleAddition(code){
@@ -502,8 +453,6 @@ function handleAddition(code){
 }
 
 function addToList(code, grade, modCred, workHrs){
-  // console.log("ADD TO LIST");
-  // console.log(mc);
   const newModule = [
     ...Module,
     {
@@ -524,9 +473,6 @@ function addToList(code, grade, modCred, workHrs){
 
 
   function addModule(code, grade) {
-    // console.log("ADD MOD");
-    // console.log(mc);
-    // const newMC = MC+ MCtl;
 
     const add1 = parseInt(MC);
     const add2 = parseInt(MCtl);
@@ -536,26 +482,17 @@ function addToList(code, grade, modCred, workHrs){
 
     
     const mods = Module.map(x=>x.code);
-    // console.log("Workload");
-    // console.log(workload);
     const wl = workload.reduce((partialSum, a) => partialSum + a, 0);
     const wl1 = parseInt(wl);
     const wl2 = parseInt(workloadTl);
     const newWl = wl1 + wl2;
     setWorkloadTl(newWl);
-    // console.log(wl);
     if(mods.includes(code)){
      const msg = "You cannot add the same module twice! " + code;
-    //  console.log(msg);
      alert(msg);
     } else {
-      // const grade = Module.map(x=>x.grade);
       handleAddition(code);
-      // console.log(MC);
-      // handleMCs(code);
-      // console.log(p);
       addToList(code, grade, MC, wl);
-      // console.log(eligibleMods);
     }
     setSelected(true);
 
@@ -563,7 +500,6 @@ function addToList(code, grade, modCred, workHrs){
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    // console.log("hhhhhhh");
     if(modCode){
     addModule(modCode, gradePlanned);
     } else {
@@ -583,7 +519,6 @@ function addToList(code, grade, modCred, workHrs){
 
       const userI = onSnapshot(doc(db, "users", firebase.auth().currentUser.uid), 
       (doc) => {
-        //console.log(doc.data());
         setUser(doc.data());
         });
         return userI;
@@ -594,9 +529,6 @@ function addToList(code, grade, modCred, workHrs){
 
   React.useEffect(()=>{getInfo()}, []);
 
-  //arr.map(JSON.stringify).filter((e,i,a) => i === a.indexOf(e)).map(JSON.parse)
-  
-
   const updateProfile = async (id) =>{
 
     const mods = Module.map(x => x.code);
@@ -604,12 +536,6 @@ function addToList(code, grade, modCred, workHrs){
 
     if(ys==="YEAR 1 SEM 1"){
       const planned = user.Y1S1Planned;
-      // console.log(planned);
-      // const confirmed = user.Y2S1Confirmed;
-      // const newPlanned = planned.concat(mods).filter((v, i, a) => a.indexOf(v) === i);
-      // const newConfirmed = confirmed.concat(mods).filter((v, i, a) => a.indexOf(v) === i);
-      // console.log(Module.map(x=>x.code));
-      // console.log(user.newMods.map(y=>y.code));
       const repetitive = planned.map(y=>y.code);
       const newMods = planned.concat(Module.filter(a => !repetitive.includes(a.code)));
       const currMC = user.currentMC + MCtl;
@@ -627,36 +553,28 @@ function addToList(code, grade, modCred, workHrs){
       otherProgrammes: user.otherProgrammes,
 
       Y1S1Planned: newMods,
-      // Y1S1Confirmed: newConfirmed,
       Y1S1CAP: user.Y1S1CAP,
       Y1S1MC: semMC,
 
       Y1S2Planned: user.Y1S2Planned,
-      // Y1S2Confirmed: user.Y1S2Confirmed,
       Y1S2CAP:user.Y1S2CAP,
 
       Y2S1Planned: user.Y2S1Planned,
-      // Y2S1Confirmed: user.Y2S1Confirmed,
       Y2S1CAP:user.Y2S1CAP,
 
       Y2S2Planned: user.Y2S2Planned,
-      // Y2S2Confirmed: user.Y2S2Confirmed,
       Y2S2CAP:user.Y2S2CAP,
 
       Y3S1Planned: user.Y3S1Planned,
-      // Y3S1Confirmed: user.Y3S1Confirmed,
       Y3S1CAP:user.Y3S1CAP,
 
       Y3S2Planned: user.Y3S2Planned,
-      // Y3S2Confirmed: user.Y3S2Confirmed,
       Y3S2CAP: user.Y3S2CAP,
 
       Y4S1Planned: user.Y4S1Planned,
-      // Y4S1Confirmed: user.Y4S1Confirmed,
       Y4S1CAP:user.Y4S1CAP,
 
       Y4S2Planned: user.Y4S2Planned,
-      // Y4S2Confirmed: user.Y4S2Confirmed,
       Y4S2CAP:user.Y4S2CAP,
 
       currentMC: currMC,
@@ -672,12 +590,6 @@ function addToList(code, grade, modCred, workHrs){
       const planned = user.Y1S2Planned;
       const currMC = user.currentMC + MCtl;
       const semMC = MCtl;
-      // console.log(planned);
-      // const confirmed = user.Y2S1Confirmed;
-      // const newPlanned = planned.concat(mods).filter((v, i, a) => a.indexOf(v) === i);
-      // const newConfirmed = confirmed.concat(mods).filter((v, i, a) => a.indexOf(v) === i);
-      // console.log(Module.map(x=>x.code));
-      // console.log(user.newMods.map(y=>y.code));
       const repetitive = planned.map(y=>y.code);
       const newMods = planned.concat(Module.filter(a => !repetitive.includes(a.code)));
 
@@ -694,36 +606,28 @@ function addToList(code, grade, modCred, workHrs){
       otherProgrammes: user.otherProgrammes,
 
       Y1S1Planned: user.Y1S1Planned,
-      // Y1S1Confirmed: user.Y1S1Confirmed,
       Y1S1CAP: user.Y1S1CAP,
 
       Y1S2Planned: newMods,
-      // Y1S2Confirmed: newConfirmed,
       Y1S2CAP:user.Y1S2CAP,
       Y1S2MC: semMC,
 
       Y2S1Planned: user.Y2S1Planned,
-      // Y2S1Confirmed: user.Y2S1Confirmed,
       Y2S1CAP:user.Y2S1CAP,
 
       Y2S2Planned: user.Y2S2Planned,
-      // Y2S2Confirmed: user.Y2S2Confirmed,
       Y2S2CAP:user.Y2S2CAP,
 
       Y3S1Planned: user.Y3S1Planned,
-      // Y3S1Confirmed: user.Y3S1Confirmed,
       Y3S1CAP:user.Y3S1CAP,
 
       Y3S2Planned: user.Y3S2Planned,
-      // Y3S2Confirmed: user.Y3S2Confirmed,
       Y3S2CAP: user.Y3S2CAP,
 
       Y4S1Planned: user.Y4S1Planned,
-      // Y4S1Confirmed: user.Y4S1Confirmed,
       Y4S1CAP:user.Y4S1CAP,
 
       Y4S2Planned: user.Y4S2Planned,
-      // Y4S2Confirmed: user.Y4S2Confirmed,
       Y4S2CAP:user.Y4S2CAP,
 
       currentMC: currMC,
@@ -738,12 +642,6 @@ function addToList(code, grade, modCred, workHrs){
       const planned = user.Y2S1Planned;
       const currMC = user.currentMC + MCtl;
       const semMC = MCtl;
-      // console.log(planned);
-      // const confirmed = user.Y2S1Confirmed;
-      // const newPlanned = planned.concat(mods).filter((v, i, a) => a.indexOf(v) === i);
-      // const newConfirmed = confirmed.concat(mods).filter((v, i, a) => a.indexOf(v) === i);
-      // console.log(Module.map(x=>x.code));
-      // console.log(user.newMods.map(y=>y.code));
       const repetitive = planned.map(y=>y.code);
       const newMods = planned.concat(Module.filter(a => !repetitive.includes(a.code)));
 
@@ -759,37 +657,27 @@ function addToList(code, grade, modCred, workHrs){
         otherProgrammes: user.otherProgrammes,
   
         Y1S1Planned: user.Y1S1Planned,
-        // Y1S1Confirmed: user.Y1S1Confirmed,
-        Y1S1CAP: user.Y1S1CAP,
-        // newMods: Module,
-  
+        Y1S1CAP: user.Y1S1CAP,  
         Y1S2Planned: user.Y1S2Planned,
-        // Y1S2Confirmed: user.Y1S2Confirmed,
         Y1S2CAP:user.Y1S2CAP,
   
         Y2S1Planned: newMods,
-        // Y2S1Confirmed: newConfirmed,
         Y2S1CAP:user.Y2S1CAP,
         Y2S1MC: semMC,
   
         Y2S2Planned: user.Y2S2Planned,
-        // Y2S2Confirmed: user.Y2S2Confirmed,
         Y2S2CAP:user.Y2S2CAP,
   
         Y3S1Planned: user.Y3S1Planned,
-        // Y3S1Confirmed: user.Y3S1Confirmed,
         Y3S1CAP:user.Y3S1CAP,
   
         Y3S2Planned: user.Y3S2Planned,
-        // Y3S2Confirmed: user.Y3S2Confirmed,
         Y3S2CAP: user.Y3S2CAP,
   
         Y4S1Planned: user.Y4S1Planned,
-        // Y4S1Confirmed: user.Y4S1Confirmed,
         Y4S1CAP:user.Y4S1CAP,
   
         Y4S2Planned: user.Y4S2Planned,
-        // Y4S2Confirmed: user.Y4S2Confirmed,
         Y4S2CAP:user.Y4S2CAP,
   
         currentMC: currMC,
@@ -804,12 +692,6 @@ function addToList(code, grade, modCred, workHrs){
       const planned = user.Y2S2Planned;
       const currMC = user.currentMC + MCtl;
       const semMC = MCtl;
-      // console.log(planned);
-      // const confirmed = user.Y2S1Confirmed;
-      // const newPlanned = planned.concat(mods).filter((v, i, a) => a.indexOf(v) === i);
-      // const newConfirmed = confirmed.concat(mods).filter((v, i, a) => a.indexOf(v) === i);
-      // console.log(Module.map(x=>x.code));
-      // console.log(user.newMods.map(y=>y.code));
       const repetitive = planned.map(y=>y.code);
       const newMods = planned.concat(Module.filter(a => !repetitive.includes(a.code)));
 
@@ -825,36 +707,28 @@ function addToList(code, grade, modCred, workHrs){
         otherProgrammes: user.otherProgrammes,
   
         Y1S1Planned: user.Y1S1Planned,
-        // Y1S1Confirmed: user.Y1S1Confirmed,
         Y1S1CAP: user.Y1S1CAP,
   
         Y1S2Planned: user.Y1S2Planned,
-        // Y1S2Confirmed: user.Y1S2Confirmed,
         Y1S2CAP:user.Y1S2CAP,
   
         Y2S1Planned: user.Y2S1Planned,
-        // Y2S1Confirmed: user.Y2S1Confirmed,
         Y2S1CAP:user.Y2S1CAP,
   
         Y2S2Planned: newMods,
-        // Y2S2Confirmed: new,
         Y2S2CAP:user.Y2S2CAP,
         Y2S2MC: semMC,
   
         Y3S1Planned: user.Y3S1Planned,
-        // Y3S1Confirmed: user.Y3S1Confirmed,
         Y3S1CAP:user.Y3S1CAP,
   
         Y3S2Planned: user.Y3S2Planned,
-        // Y3S2Confirmed: user.Y3S2Confirmed,
         Y3S2CAP: user.Y3S2CAP,
   
         Y4S1Planned: user.Y4S1Planned,
-        // Y4S1Confirmed: user.Y4S1Confirmed,
         Y4S1CAP:user.Y4S1CAP,
   
         Y4S2Planned: user.Y4S2Planned,
-        // Y4S2Confirmed: user.Y4S2Confirmed,
         Y4S2CAP:user.Y4S2CAP,
   
         eligibleMods: user.eligibleMods.concat(eligibleMods).filter((v, i, a) => a.indexOf(v) === i),
@@ -866,12 +740,6 @@ function addToList(code, grade, modCred, workHrs){
     }
     if(ys==="YEAR 3 SEM 1"){
       const planned = user.Y3S1Planned;
-      // console.log(planned);
-      // const confirmed = user.Y2S1Confirmed;
-      // const newPlanned = planned.concat(mods).filter((v, i, a) => a.indexOf(v) === i);
-      // const newConfirmed = confirmed.concat(mods).filter((v, i, a) => a.indexOf(v) === i);
-      // console.log(Module.map(x=>x.code));
-      // console.log(user.newMods.map(y=>y.code));
       const repetitive = planned.map(y=>y.code);
       const newMods = planned.concat(Module.filter(a => !repetitive.includes(a.code)));
       const currMC = user.currentMC + MCtl;
@@ -889,36 +757,28 @@ function addToList(code, grade, modCred, workHrs){
         otherProgrammes: user.otherProgrammes,
   
         Y1S1Planned: user.Y1S1Planned,
-        // Y1S1Confirmed: user.Y1S1Confirmed,
         Y1S1CAP: user.Y1S1CAP,
   
         Y1S2Planned: user.Y1S2Planned,
-        // Y1S2Confirmed: user.Y1S2Confirmed,
         Y1S2CAP:user.Y1S2CAP,
   
         Y2S1Planned: user.Y2S1Planned,
-        // Y2S1Confirmed: user.Y2S1Confirmed,
         Y2S1CAP:user.Y2S1CAP,
   
         Y2S2Planned: user.Y2S2Planned,
-        // Y2S2Confirmed: user.Y2S2Confirmed,
         Y2S2CAP:user.Y2S2CAP,
   
         Y3S1Planned: newMods,
-        // Y3S1Confirmed: newConfirmed,
         Y3S1CAP:user.Y3S1CAP,
         Y3S1MC: semMC,
   
         Y3S2Planned: user.Y3S2Planned,
-        // Y3S2Confirmed: user.Y3S2Confirmed,
         Y3S2CAP: user.Y3S2CAP,
   
         Y4S1Planned: user.Y4S1Planned,
-        // Y4S1Confirmed: user.Y4S1Confirmed,
         Y4S1CAP:user.Y4S1CAP,
   
         Y4S2Planned: user.Y4S2Planned,
-        // Y4S2Confirmed: user.Y4S2Confirmed,
         Y4S2CAP:user.Y4S2CAP,
   
         eligibleMods: user.eligibleMods.concat(eligibleMods).filter((v, i, a) => a.indexOf(v) === i),
@@ -932,12 +792,6 @@ function addToList(code, grade, modCred, workHrs){
       const planned = user.Y3S2Planned;
       const currMC = user.currentMC + MCtl;
       const semMC = MCtl;
-      // console.log(planned);
-      // const confirmed = user.Y2S1Confirmed;
-      // const newPlanned = planned.concat(mods).filter((v, i, a) => a.indexOf(v) === i);
-      // const newConfirmed = confirmed.concat(mods).filter((v, i, a) => a.indexOf(v) === i);
-      // console.log(Module.map(x=>x.code));
-      // console.log(user.newMods.map(y=>y.code));
       const repetitive = planned.map(y=>y.code);
       const newMods = planned.concat(Module.filter(a => !repetitive.includes(a.code)));
       const userNew = {
@@ -952,36 +806,28 @@ function addToList(code, grade, modCred, workHrs){
         otherProgrammes: user.otherProgrammes,
   
         Y1S1Planned: user.Y1S1Planned,
-        // Y1S1Confirmed: user.Y1S1Confirmed,
         Y1S1CAP: user.Y1S1CAP,
   
         Y1S2Planned: user.Y1S2Planned,
-        // Y1S2Confirmed: user.Y1S2Confirmed,
         Y1S2CAP:user.Y1S2CAP,
   
         Y2S1Planned: user.Y2S1Planned,
-        // Y2S1Confirmed: user.Y2S1Confirmed,
         Y2S1CAP:user.Y2S1CAP,
   
         Y2S2Planned: user.Y2S2Planned,
-        // Y2S2Confirmed: user.Y2S2Confirmed,
         Y2S2CAP:user.Y2S2CAP,
   
         Y3S1Planned: user.Y3S1Planned,
-        // Y3S1Confirmed: user.Y3S1Confirmed,
         Y3S1CAP:user.Y3S1CAP,
   
         Y3S2Planned: newMods,
-        // Y3S2Confirmed: newConfirmed,
         Y3S2CAP: user.Y3S2CAP,
         Y3S2MC: semMC,
   
         Y4S1Planned: user.Y4S1Planned,
-        // Y4S1Confirmed: user.Y4S1Confirmed,
         Y4S1CAP:user.Y4S1CAP,
   
         Y4S2Planned: user.Y4S2Planned,
-        // Y4S2Confirmed: user.Y4S2Confirmed,
         Y4S2CAP:user.Y4S2CAP,
   
         eligibleMods: user.eligibleMods.concat(eligibleMods).filter((v, i, a) => a.indexOf(v) === i),
@@ -995,12 +841,6 @@ function addToList(code, grade, modCred, workHrs){
       const planned = user.Y4S1Planned;
       const currMC = user.currentMC + MCtl;
       const semMC = MCtl;
-      // console.log(planned);
-      // const confirmed = user.Y2S1Confirmed;
-      // const newPlanned = planned.concat(mods).filter((v, i, a) => a.indexOf(v) === i);
-      // const newConfirmed = confirmed.concat(mods).filter((v, i, a) => a.indexOf(v) === i);
-      // console.log(Module.map(x=>x.code));
-      // console.log(user.newMods.map(y=>y.code));
       const repetitive = planned.map(y=>y.code);
       const newMods = planned.concat(Module.filter(a => !repetitive.includes(a.code)));
       const userNew = {
@@ -1015,36 +855,28 @@ function addToList(code, grade, modCred, workHrs){
         otherProgrammes: user.otherProgrammes,
   
         Y1S1Planned: user.Y1S1Planned,
-        // Y1S1Confirmed: user.Y1S1Confirmed,
         Y1S1CAP: user.Y1S1CAP,
   
         Y1S2Planned: user.Y1S2Planned,
-        // Y1S2Confirmed: user.Y1S2Confirmed,
         Y1S2CAP:user.Y1S2CAP,
   
         Y2S1Planned: user.Y2S1Planned,
-        // Y2S1Confirmed: user.Y2S1Confirmed,
         Y2S1CAP:user.Y2S1CAP,
   
         Y2S2Planned: user.Y2S2Planned,
-        // Y2S2Confirmed: user.Y2S2Confirmed,
         Y2S2CAP:user.Y2S2CAP,
   
         Y3S1Planned: user.Y3S1Planned,
-        // Y3S1Confirmed: user.Y3S1Confirmed,
         Y3S1CAP:user.Y3S1CAP,
   
         Y3S2Planned: user.Y3S2Planned,
-        // Y3S2Confirmed: user.Y3S2Confirmed,
         Y3S2CAP: user.Y3S2CAP,
   
         Y4S1Planned: newMods,
-        // Y4S1Confirmed: newConfirmed,
         Y4S1CAP:user.Y4S1CAP,
         Y4S1MC: semMC,
   
         Y4S2Planned: user.Y4S2Planned,
-        // Y4S2Confirmed: user.Y4S2Confirmed,
         Y4S2CAP:user.Y4S2CAP,
   
         eligibleMods: user.eligibleMods.concat(eligibleMods).filter((v, i, a) => a.indexOf(v) === i),
@@ -1058,12 +890,6 @@ function addToList(code, grade, modCred, workHrs){
       const planned = user.Y4S2Planned;
       const currMC = user.currentMC + MCtl;
       const semMC = MCtl;
-      // console.log(planned);
-      // const confirmed = user.Y2S1Confirmed;
-      // const newPlanned = planned.concat(mods).filter((v, i, a) => a.indexOf(v) === i);
-      // const newConfirmed = confirmed.concat(mods).filter((v, i, a) => a.indexOf(v) === i);
-      // console.log(Module.map(x=>x.code));
-      // console.log(user.newMods.map(y=>y.code));
       const repetitive = planned.map(y=>y.code);
       const newMods = planned.concat(Module.filter(a => !repetitive.includes(a.code)));
       const userNew = {
@@ -1078,35 +904,27 @@ function addToList(code, grade, modCred, workHrs){
         otherProgrammes: user.otherProgrammes,
   
         Y1S1Planned: user.Y1S1Planned,
-        // Y1S1Confirmed: user.Y1S1Confirmed,
         Y1S1CAP: user.Y1S1CAP,
   
         Y1S2Planned: user.Y1S2Planned,
-        // Y1S2Confirmed: user.Y1S2Confirmed,
         Y1S2CAP:user.Y1S2CAP,
   
         Y2S1Planned: user.Y2S1Planned,
-        // Y2S1Confirmed: user.Y2S1Confirmed,
         Y2S1CAP:user.Y2S1CAP,
   
         Y2S2Planned: user.Y2S2Planned,
-        // Y2S2Confirmed: user.Y2S2Confirmed,
         Y2S2CAP:user.Y2S2CAP,
   
         Y3S1Planned: user.Y3S1Planned,
-        // Y3S1Confirmed: user.Y3S1Confirmed,
         Y3S1CAP:user.Y3S1CAP,
   
         Y3S2Planned: user.Y3S2Planned,
-        // Y3S2Confirmed: user.Y3S2Confirmed,
         Y3S2CAP: user.Y3S2CAP,
   
         Y4S1Planned: user.Y4S1Planned,
-        // Y4S1Confirmed: user.Y4S1Confirmed,
         Y4S1CAP:user.Y4S1CAP,
   
         Y4S2Planned: newMods,
-        // Y4S2Confirmed: newConfirmed,
         Y4S2CAP:user.Y4S2CAP,
         Y4S2MC: semMC,
   
@@ -1118,7 +936,6 @@ function addToList(code, grade, modCred, workHrs){
         await updateDoc(userDoc, userNew);
     }
     else{
-     //alert("Please choose a year and semester!");
     }
   }
 
@@ -1227,7 +1044,6 @@ function addToList(code, grade, modCred, workHrs){
         setModCode(value.moduleCode);
         const mcCount = findMC(value.moduleCode);
         const wlCount = findWL(value.moduleCode);
-        // console.log(mcCount);
         }}
       }
 

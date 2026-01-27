@@ -5,7 +5,6 @@ const API_NUSMODS_URL = 'https://api.nusmods.com/2018-2019/moduleInformation.jso
 
 export default function SearchModBar() {
     const [data, setData] = React.useState("");
-    const [prec, setPrec] = React.useState("");
 
     React.useEffect(
         () => {
@@ -14,13 +13,6 @@ export default function SearchModBar() {
             .then(d => setData(d))
         }, []
     );
-
-    //const preclusion = data.value.map(x=>x.ModuleCode);
-    //setPrec(preclusion);
-    //console.log(prec);
-    //console.log(data.Preclusions);
-    //const dataMod = data.map(x=>x.ModuleCode);
-    //console.log(dataMod);
 
 
   return (

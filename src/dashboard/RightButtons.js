@@ -6,7 +6,6 @@ import ExitToApp from '@mui/icons-material/ExitToApp';
 import { useNavigate } from 'react-router-dom';
 import LogoutIcon from '@mui/icons-material/Logout';
 import firebase from 'firebase/compat/app';
-import { List } from '@mui/material';
 
 export default function RightButtons(){
     const goTo = useNavigate();

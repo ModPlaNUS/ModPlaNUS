@@ -14,18 +14,6 @@ import GlobalStyles from '@mui/material/GlobalStyles';
 import Container from '@mui/material/Container';
 import { useNavigate } from 'react-router-dom';
 
-function Copyright(props) {
-  return (
-    <Typography variant="body2" color="text.secondary" align="center" {...props}>
-      {'Copyright © '}
-      <Link color="inherit" href="https://mui.com/">
-        Your Website
-      </Link>{' '}
-      {new Date().getFullYear()}
-      {'.'}
-    </Typography>
-  );
-}
 
 const tiers = [
   {
@@ -54,24 +42,6 @@ const tiers = [
   },
 ];
 
-const footers = [
-  {
-    title: 'Contact Us',
-    description: ['Feedback Form', 'GitHub'],
-    path: [`/`, `https://github.com/ModPlaNUS/ModPlaNUS`]
-  },
-  {
-    title: 'Useful Websites',
-    description: [
-      'LumiNUS',
-      'NUSMODS',
-      'EduRec',
-    ],
-    path:['https://luminus.nus.edu.sg/?r=%2Fdashboard', 
-    'https://nusmods.com/timetable/sem-1', 
-    'https://myedurec.nus.edu.sg/psp/cs90prd/?cmd=login&languageCd=ENG&'],
-  },
-];
 
 export default function Dashboard() {
   

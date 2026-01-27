@@ -10,13 +10,11 @@ import firebase from 'firebase/compat/app';
 import 'firebase/compat/auth';
 import 'firebase/compat/database';
 import { useNavigate } from 'react-router-dom';
-import { getAuth } from "firebase/auth";
 import { db } from '../authentication/firebase-config';
 import {
   onSnapshot,
   updateDoc,
   doc,
-  update,
 } from "firebase/firestore";
 import '@firebase/firestore'
 
@@ -32,7 +30,6 @@ export default function Profile() {
   const [otherProgrammes, setOtherProgrammes] = useState('');
   const [year, setYear] = useState('');
   const [semester, setSemester] = useState('');
-  const [info, setInfo] = useState([]);
 
 
   const [userInfo, setUserInfo] = useState([]);
@@ -47,12 +44,10 @@ export default function Profile() {
 
       const user = onSnapshot(doc(db, "users", firebase.auth().currentUser.uid), 
        (doc) => {
-        //console.log(doc.data());
          setUserInfo(doc.data());
         });
         return user;
       } else {
-      //  console.log("no info");
       }
   }
 
@@ -90,7 +85,6 @@ export default function Profile() {
       otherProgrammes: otherProgrammes,
     }
     await updateDoc(userDoc, userNew);
-    // const res = await userDoc.update({firstName: firstName});
   };
 
   const goTo = useNavigate();
@@ -99,9 +93,7 @@ export default function Profile() {
         goTo('/dashboard');
   };
 
-  const auth = getAuth();
 
-  const emailStr = userInfo.email;
   
 
   return (

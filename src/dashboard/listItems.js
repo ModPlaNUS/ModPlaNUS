@@ -1,12 +1,9 @@
-import * as React from 'react';
 import ListItemButton from '@mui/material/ListItemButton';
 import ListItemIcon from '@mui/material/ListItemIcon';
 import ListItemText from '@mui/material/ListItemText';
 import CalculateIcon from '@mui/icons-material/Calculate';
 import HomeIcon from '@mui/icons-material/Home';
 import DesignServicesIcon from '@mui/icons-material/DesignServices';
-import BookIcon from '@mui/icons-material/Book';
-import MessageIcon from '@mui/icons-material/Message';
 import ManageAccountsIcon from '@mui/icons-material/ManageAccounts';
 import { useNavigate } from 'react-router-dom';
 import firebase from 'firebase/compat/app';
@@ -47,15 +44,6 @@ export default function ListItems(){
 
   const goToPlanner = () =>{ 
     let path = `/planner`; 
-    if(user!==null){
-      goTo(path);
-    }else{
-      goTo('/signin');
-    }
-  };
-
-  const goToChatroom = () =>{ 
-    let path = `/Chatroom`; 
     if(user!==null){
       goTo(path);
     }else{
