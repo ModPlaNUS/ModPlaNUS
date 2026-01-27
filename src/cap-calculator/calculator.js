@@ -1,6 +1,6 @@
 import React from "react";
 import { useState } from "react";
-import Box from "../module-planner/Components/Box/Box";
+import Box from "../module-planner/components/box/Box";
 import Button from "@mui/material/Button";
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import Typography from '@mui/material/Typography';
@@ -8,22 +8,18 @@ import CssBaseline from '@mui/material/CssBaseline';
 import Paper from '@mui/material/Paper';
 import Grid from '@mui/material/Grid';
 import Input from '@mui/material/Input';
-import { InputAdornment } from "@mui/material";
-import InputLabel from '@mui/material/InputLabel';
 import MenuItem from '@mui/material/MenuItem';
 import FormControl from '@mui/material/FormControl';
-import Select, { SelectChangeEvent } from '@mui/material/Select';
+import Select from '@mui/material/Select';
 import firebase from 'firebase/compat/app';
 import 'firebase/compat/auth';
 import 'firebase/compat/database';
-import DeleteIcon from '@mui/icons-material/Delete';
 import SaveIcon from '@mui/icons-material/Save';
 import { db } from '../authentication/firebase-config';
 import {
   onSnapshot,
   updateDoc,
   doc,
-  update,
 } from "firebase/firestore";
 import '@firebase/firestore'
 var temp;
@@ -41,8 +37,6 @@ export default function Calculator() {
   const [addModuleText, setAddModuleText] = useState("");
   const [cmc, setCMC] = useState(0);
   const [cap, setCap] = useState(0);
-  const [firstName, setFirstName] = useState('');
-  const [lastName, setLastName] = useState('');
   const [userInfo, setUserInfo] = useState([]);
 
   function getInfo(){
@@ -50,12 +44,10 @@ export default function Calculator() {
 
       const user = onSnapshot(doc(db, "users", firebase.auth().currentUser.uid), 
        (doc) => {
-        //console.log(doc.data());
          setUserInfo(doc.data());
         });
         return user;
       } else {
-      //  console.log("no info");
       }
   }
 
@@ -71,10 +63,6 @@ export default function Calculator() {
   }, [userInfo]);
 
   function handleAddModule(event) {
-    // React honours default browser behavior and the
-    // default behaviour for a form submission is to
-    // submit AND refresh the page. So we override the
-    // default behaviour here as we don't want to refresh
     event.preventDefault();
     addModule(addModuleText, addGradeText, addMC);
     console.log('hiii');
@@ -103,9 +91,7 @@ export default function Calculator() {
     setCredits(credits + (des * ComputeC(desc)));
     const newNew = newModule.map((m) => m.description);
     setModule(newModule);
-    //console.log(newModule);
     console.log(newNew);
-    //setS(newNew);
   }
 
   const updateUser = async (id) => {
@@ -116,7 +102,6 @@ export default function Calculator() {
       currentCAPMC: mc + cmc
     }
     await updateDoc(userDoc, userNew);
-    // const res = await userDoc.update({firstName: firstName});
   };
 
   const handleSubmit = (e) => {
@@ -130,7 +115,6 @@ export default function Calculator() {
 
   }
 
-  const database = firebase.database();
 
   function ComputeC(grade) {
     if (grade === "A+" || grade === "A") {
@@ -241,7 +225,6 @@ export default function Calculator() {
                   temp = event.target.value; 
                   setAddGradeText(event.target.value);
                 }}
-                // label="Grade"
               >
                 <MenuItem value="">
                 </MenuItem>
@@ -323,13 +306,6 @@ export default function Calculator() {
             >
             Save Changes
             </Button>
-            {/* <Button variant="outlined" 
-            startIcon={<DeleteIcon />}
-            sx ={{m: 4}} 
-            onClick={ deleteProfile }
-            >
-            Delete Account
-            </Button> */}
             </Grid>
           </Box>
           <p> </p>

@@ -1,13 +1,10 @@
 import * as React from 'react';
 import { Button, Card, Typography } from "@mui/material";
 import TextField from '@mui/material/TextField';
-import { getAuth, updatePassword } from "firebase/auth";
-import firebase from 'firebase/compat/app';
-import {signInWithEmailAndPassword, sendPasswordResetEmail} from "firebase/auth";
+import {sendPasswordResetEmail} from "firebase/auth";
 import { auth } from './firebase-config';
 export default function ForgotPassword(){
    
-    //const auth = getAuth();
     const [email, setEmail] = React.useState('');
     
     const forgotPassword = (Email) => {

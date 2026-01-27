@@ -71,18 +71,6 @@ export default function ListItems(){
       </ListItemIcon>
       <ListItemText primary="CAP Calculator" />
     </ListItemButton>
-    {/* <ListItemButton>
-      <ListItemIcon>
-        <BookIcon />
-      </ListItemIcon>
-      <ListItemText primary="Module Information" />
-    </ListItemButton> */}
-    {/* <ListItemButton onClick={goToChatroom}>
-      <ListItemIcon>
-        <MessageIcon />
-      </ListItemIcon>
-      <ListItemText primary="ChatRoom" />
-    </ListItemButton> */}
     <ListItemButton onClick={goToProfile}>
       <ListItemIcon>
         <ManageAccountsIcon />

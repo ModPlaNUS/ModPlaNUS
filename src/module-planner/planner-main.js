@@ -1,6 +1,6 @@
 import React from "react";
 import { useState } from "react";
-import Box from "./Components/Box/Box";
+import Box from "./components/box/Box";
 import Button from "@mui/material/Button";
 import TextField from '@mui/material/TextField';
 import Autocomplete from '@mui/material/Autocomplete';
@@ -1093,25 +1093,6 @@ function addToList(code, grade, modCred, workHrs){
           </Box>
 
           <Box>
-            {/* <h2>List of modules</h2>
-            <table style={{ margin: "0 auto", width: "100%" }}>
-              <thead>
-                <tr>
-                  <th>No.</th>
-                  <th>Modules</th>
-                </tr>
-              </thead>
-              <tbody>
-                {Module.map((Mod, idx) => (
-                  <tr key={Mod.code}>
-                    <td>{idx + 1}</td>
-                    <td>{Mod.code}</td>
-
-                  </tr>
-                ))}
-              </tbody>
-            </table> */}
-
             <div>
             {Module.length > 0 ? (
                 <ModuleList modules={Module} setModules={setModule} />

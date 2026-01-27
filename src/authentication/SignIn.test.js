@@ -1,13 +1,8 @@
-import React from'react';
-import ReactDOM from 'react-dom';
 import SignIn from './SignIn'; 
 import {render, cleanup, fireEvent} from '@testing-library/react'
 import "@testing-library/jest-dom/extend-expect";
-import { SignInMethod } from 'firebase/auth';
 import {screen} from '@testing-library/react'
 import {BrowserRouter as Router} from 'react-router-dom';
-import userEvent from '@testing-library/user-event';
-//import renderer from 'react-test-renderer';
 
 afterEach(cleanup);
 
@@ -20,14 +15,6 @@ test('renders sign in component', async () => {
   });
 
 
-// it("renders signin correctly", () => {
-
-//     const view = render(
-//     <Router>
-//     <SignIn />,
-//     </Router>,);
-//     expect(view).toEqual(screen.getByText(SignIn));
-// })
 
 const validateInput = (str = "") => str.includes("@u.nus.edu");
 const validatepass = (str = "") => str.length >= 8;
@@ -64,35 +51,15 @@ describe("login", () => {
     });
 
     it("email input should accept test", () => {
-        // const { getByLabelText, getByText } = render(<SignIn/>);
         const view = render(
             <Router>
             <SignIn />,
             </Router>,
         );
         const emailInputNode = screen.getByTestId("email-input");
-        // expect(emailInputNode.value).toMatch("");
         fireEvent.change(emailInputNode, {target: {value: 'testing'}})
         expect(emailInputNode.value).toMatch("testing");
     });
 
-    // it("should be able to submit form", () => {
-    //     const mockFn = jest.fn()
-    //     const view = render(
-    //         <Router>
-    //         <SignIn handleSubmit = {mockFn}/>,
-    //         </Router>,);
-    //    const buttonNode = screen.getByTestId('formSignIn');
-    //    userEvent.click(screen.getByTestId('buttonSignIn'));
-    //     expect(mockFn).toHaveBeenCalled();
-
-    // });
 
 });
-
-/** 
-it("matches snapshot", () => {
-    const tree =renderer.create(<signIn></signIn>).toJSON();
-    expect(tree).toMatchSnapshot();
-})*/
-
