@@ -1,0 +1,55 @@
+/* ===== Chatroom Page ===== */
+.chatroom {
+  min-height: 100vh;
+  width: 100%;
+  background-image: url("/chatroom-bg.jpg");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* ===== Dark overlay for readability ===== */
+.chatroom-overlay {
+  background: rgba(255, 248, 232, 0.92);
+  backdrop-filter: blur(6px);
+  padding: 48px 56px;
+  border-radius: 20px;
+  text-align: center;
+  max-width: 600px;
+
+  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.18);
+}
+
+/* ===== Title ===== */
+.chatroom-title {
+  font-weight: 700 !important;
+  letter-spacing: 0.08em;
+  color: #4a3200;
+  margin-bottom: 16px !important;
+}
+
+/* ===== Subtitle ===== */
+.chatroom-subtitle {
+  font-size: 1.1rem !important;
+  color: #6b4f1d;
+  margin-bottom: 20px !important;
+}
+
+/* ===== Description ===== */
+.chatroom-note {
+  font-size: 0.95rem !important;
+  color: #7a5a2a;
+  line-height: 1.6;
+}
+
+/* ===== Mobile ===== */
+@media (max-width: 768px) {
+  .chatroom-overlay {
+    padding: 32px 24px;
+    margin: 16px;
+  }
+}

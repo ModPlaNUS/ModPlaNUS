@@ -10,7 +10,6 @@ export default function Buttons() {
   const routes = [
     { label: "PLANNER", path: "/planner" },
     { label: "CALCULATE CAP", path: "/calculator" },
-    { label: "CHATROOM", path: "/chatroom" },
   ];
 
   return (

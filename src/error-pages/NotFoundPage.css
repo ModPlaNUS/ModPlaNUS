@@ -1,0 +1,75 @@
+/* ===== 404 Page Wrapper ===== */
+.notfound {
+  min-height: 100vh;
+  width: 100%;
+  background-image: url("../assets/404-illustration.png");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* ===== Overlay Card ===== */
+.notfound-overlay {
+  background: rgba(255, 248, 232, 0.94);
+  backdrop-filter: blur(6px);
+  padding: 56px 64px;
+  border-radius: 22px;
+  text-align: center;
+  max-width: 520px;
+
+  box-shadow: 0 14px 36px rgba(0, 0, 0, 0.18);
+}
+
+/* ===== 404 Code ===== */
+.notfound-code {
+  font-weight: 800 !important;
+  font-size: 4rem !important;
+  color: #d08b2c;
+  margin-bottom: 8px !important;
+}
+
+/* ===== Title ===== */
+.notfound-title {
+  font-weight: 600 !important;
+  letter-spacing: 0.05em;
+  color: #4a3200;
+  margin-bottom: 16px !important;
+}
+
+/* ===== Text ===== */
+.notfound-text {
+  font-size: 1rem !important;
+  color: #6b4f1d;
+  line-height: 1.6;
+  margin-bottom: 28px !important;
+}
+
+/* ===== Button ===== */
+.notfound-btn {
+  background: linear-gradient(135deg, #f6c177, #e8a94d) !important;
+  color: #4a3200 !important;
+  font-weight: 600 !important;
+  border-radius: 14px !important;
+  padding: 10px 28px !important;
+  text-transform: none !important;
+}
+
+.notfound-btn:hover {
+  background: linear-gradient(135deg, #efb35b, #db9a39) !important;
+}
+
+/* ===== Mobile ===== */
+@media (max-width: 768px) {
+  .notfound-overlay {
+    padding: 36px 28px;
+    margin: 16px;
+  }
+
+  .notfound-code {
+    font-size: 3.2rem !important;
+  }
+}
