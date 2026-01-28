@@ -1,0 +1,15 @@
+.right-buttons {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.right-icon-btn {
+  color: var(--mui-palette-text-secondary);
+  transition: color 0.2s ease, transform 0.15s ease;
+}
+
+.right-icon-btn:hover {
+  color: var(--mui-palette-primary-main);
+  transform: translateY(-1px);
+}

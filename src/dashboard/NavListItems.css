@@ -1,0 +1,23 @@
+.nav-list {
+  padding-top: 8px;
+}
+
+.nav-item {
+  border-radius: 10px;
+  margin: 4px 8px;
+  transition: background-color 0.2s ease, transform 0.15s ease;
+}
+
+.nav-item:hover {
+  transform: translateX(2px);
+}
+
+.nav-icon {
+  color: var(--mui-palette-primary-main);
+  min-width: 40px;
+}
+
+.nav-text span {
+  font-weight: 500;
+  letter-spacing: 0.2px;
+}

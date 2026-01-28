@@ -1,17 +1,25 @@
+/* ================= Root App ================= */
+
 .App {
   text-align: center;
+  background-color: #fbf6ed; /* parchment */
+  color: #3b2f1c; /* espresso */
+  min-height: 100vh;
 }
-.Nav{
+
+/* ================= Legacy Nav (if still used) ================= */
+
+.Nav {
   display: flex;
   justify-content: space-around;
   align-items: center;
   min-height: 10vh;
-  background-color: rgb(59, 65, 245);
-  color: rgba(255, 255, 255, 0.507) !important;
-
+  background-color: #8b6b3f; /* coffee brown */
+  color: #fbf6ed;
+  box-shadow: 0 4px 20px rgba(139, 107, 63, 0.25);
 }
 
-.nav-links{
+.nav-links {
   width: 40%;
   display: flex;
   justify-content: space-around;
@@ -19,9 +27,30 @@
   list-style: none;
 }
 
+.nav-links li {
+  cursor: pointer;
+  font-weight: 500;
+  transition: color 0.2s ease;
+}
+
+.nav-links li:hover {
+  color: #e3b23c; /* golden accent */
+}
+
+/* ================= Page Wrapper ================= */
+/* Used in App.js: <div className="page"> */
+
+.page {
+  padding: 2rem;
+  background-color: #fbf6ed;
+}
+
+/* ================= App Logo (if still used) ================= */
+
 .App-logo {
   height: 40vmin;
   pointer-events: none;
+  opacity: 0.85;
 }
 
 @media (prefers-reduced-motion: no-preference) {
@@ -30,20 +59,33 @@
   }
 }
 
+/* ================= Legacy Header (optional) ================= */
+
 .App-header {
-  background-color: #282c34;
+  background-color: #f3ecd9; /* warm beige */
   min-height: 100vh;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   font-size: calc(10px + 2vmin);
-  color: white;
+  color: #3b2f1c;
 }
 
+/* ================= Links ================= */
+
 .App-link {
-  color: #61dafb;
+  color: #8b6b3f;
+  text-decoration: none;
+  font-weight: 500;
 }
+
+.App-link:hover {
+  color: #e3b23c;
+  text-decoration: underline;
+}
+
+/* ================= Animations ================= */
 
 @keyframes App-logo-spin {
   from {

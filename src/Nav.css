@@ -1,0 +1,52 @@
+/* ================= Navigation Bar ================= */
+
+.Nav {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 10vh;
+
+  background-color: #8b6b3f; /* coffee brown */
+  color: #fbf6ed; /* parchment */
+
+  box-shadow: 0 4px 20px rgba(139, 107, 63, 0.25);
+}
+
+/* ================= Nav Links ================= */
+
+.nav-links {
+  width: 80%;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.nav-links a {
+  text-decoration: none;
+  color: #fbf6ed;
+  font-weight: 500;
+  transition: color 0.2s ease;
+}
+
+.nav-links a:hover {
+  color: #e3b23c; /* golden accent */
+}
+
+.nav-links li {
+  cursor: pointer;
+}
+
+/* ================= User Info ================= */
+
+.nav-user {
+  font-size: 0.9rem;
+  color: #f7efd8;
+  opacity: 0.9;
+}
+.nav-user strong {
+  font-weight: 600;
+}

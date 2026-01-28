@@ -1,0 +1,84 @@
+/* ================= Footer ================= */
+
+.dashboard-footer {
+  width: 100%;
+  margin-top: 1rem;
+  padding: 1rem 0 0rem;
+
+  /* transparent footer */
+  background: transparent;
+  border: none;
+}
+
+/* Layout */
+.dashboard-footer-grid {
+  text-align: center;
+}
+
+.dashboard-footer-col {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* Section titles */
+.dashboard-footer-title {
+  font-weight: 500;
+  font-size: 1.35rem;
+  color: #3b2f1c;
+  margin-bottom: 1rem;
+  opacity: 0.85; /* softer than main content */
+}
+
+/* Links (single source of truth) */
+.dashboard-footer-link {
+  display: inline-block;
+  font-size: 1.05rem;
+  color: #8b6b3f;
+  text-decoration: none;
+
+  padding: 0.35rem 0.75rem;
+  margin-bottom: 0.5rem;
+  border-radius: 999px;
+
+  transition:
+    color 0.2s ease,
+    background-color 0.2s ease,
+    box-shadow 0.2s ease,
+    transform 0.15s ease;
+}
+
+.dashboard-footer-link:hover {
+  color: #3b2f1c;
+  background-color: rgba(227, 178, 60, 0.16);
+  box-shadow: 0 3px 10px rgba(139, 107, 63, 0.22);
+  transform: translateY(-1px);
+}
+
+.dashboard-footer-link:active {
+  transform: translateY(0);
+  box-shadow: none;
+}
+
+/* Icon row */
+.dashboard-footer-icons {
+  display: flex;
+  gap: 1rem;
+  margin-top: 0.5rem;
+}
+
+/* Icon buttons */
+.dashboard-footer-icon-btn {
+  color: #8b6b3f;
+  transition: 
+    color 0.2s ease,
+    transform 0.15s ease,
+    background-color 0.2s ease;
+}
+
+.dashboard-footer-icon-btn:hover {
+  color: #3b2f1c;
+  background-color: rgba(227, 178, 60, 0.18);
+  transform: translateY(-2px);
+}
+
