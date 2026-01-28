@@ -1,34 +1,35 @@
-import Button from '@mui/material/Button';
-import Stack from '@mui/material/Stack';
-import { useNavigate } from 'react-router-dom';
+import Button from "@mui/material/Button";
+import Stack from "@mui/material/Stack";
+import { useNavigate } from "react-router-dom";
 
+import "./Buttons.css";
 
 export default function Buttons() {
-  let goTo = useNavigate(); 
-  const goToPlanner = () =>{ 
-    let path = `/planner`; 
-    goTo(path);
-  };
-  const goToCalculator = () =>{ 
-    let path = `/calculator`; 
-    goTo(path);
-  };
-  const goToChatroom = () =>{ 
-    let path = `/Chatroom`; 
-    goTo(path);
-  };
+  const navigate = useNavigate();
+
+  const routes = [
+    { label: "PLANNER", path: "/planner" },
+    { label: "CALCULATE CAP", path: "/calculator" },
+    { label: "CHATROOM", path: "/chatroom" },
+  ];
 
   return (
-    <Stack direction="row" spacing={2}>
-      <Button variant="contained" onClick={goToPlanner} fullWidth>
-      PLANNER
-      </Button>
-      <Button variant="contained" onClick={goToCalculator} fullWidth>
-      CALCULATE CAP
-      </Button>
-      <Button variant="contained" onClick={goToChatroom} fullWidth>
-      CHATROOM
-      </Button>
+    <Stack
+      direction="row"
+      spacing={2}
+      className="nav-buttons"
+    >
+      {routes.map(({ label, path }) => (
+        <Button
+          key={label}
+          fullWidth
+          variant="contained"
+          className="nav-button"
+          onClick={() => navigate(path)}
+        >
+          {label}
+        </Button>
+      ))}
     </Stack>
   );
 }

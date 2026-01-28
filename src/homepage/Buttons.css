@@ -1,0 +1,41 @@
+/* ===== Navigation Buttons Wrapper ===== */
+.nav-buttons {
+  width: 100%;
+  padding: 12px;
+  border-radius: 16px;
+  background: linear-gradient(180deg, #fff4dc, #ffefd1);
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.05);
+}
+
+/* ===== Individual Buttons ===== */
+.nav-button {
+  font-weight: 600 !important;
+  letter-spacing: 0.05em !important;
+  border-radius: 14px !important;
+  padding: 12px 0 !important;
+  background: linear-gradient(135deg, #f6c177, #e8a94d) !important;
+  color: #4a3200 !important;
+  text-transform: none !important;
+  transition: transform 0.15s ease, box-shadow 0.15s ease,
+    background 0.2s ease !important;
+}
+
+/* ===== Hover ===== */
+.nav-button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 18px rgba(0, 0, 0, 0.12);
+  background: linear-gradient(135deg, #efb35b, #db9a39) !important;
+}
+
+/* ===== Active / Click ===== */
+.nav-button:active {
+  transform: translateY(0);
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+/* ===== Mobile ===== */
+@media (max-width: 768px) {
+  .nav-buttons {
+    flex-direction: column;
+  }
+}

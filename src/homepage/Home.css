@@ -1,0 +1,95 @@
+/* ====== Global ====== */
+.home {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 24px;
+}
+
+/* ====== Header ====== */
+.home-header {
+  text-align: center;
+  padding: 18px;
+  border-radius: 16px;
+  background: linear-gradient(180deg, #fff4dc, #ffefd1);
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.05);
+}
+
+/* ====== Semester Card ====== */
+.semester-card {
+  margin-bottom: 28px;
+  padding: 20px 24px;
+  border-radius: 16px;
+  background: #fff8e8;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.06);
+}
+
+/* ====== Semester title ====== */
+.semester-title {
+  font-weight: 600;
+  letter-spacing: 0.05em;
+  margin-bottom: 16px;
+  color: #6b4f1d;
+}
+
+/* ====== Table ====== */
+.module-table {
+  width: 100%;
+  border-collapse: separate;
+  border-spacing: 0 10px;
+}
+
+.module-table thead th {
+  text-align: left;
+  font-size: 0.85rem;
+  color: #8a6a2d;
+  padding: 8px 12px;
+}
+
+.module-table tbody tr {
+  background: #fffdf7;
+  border-radius: 10px;
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
+}
+
+.module-table tbody tr:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 14px rgba(0, 0, 0, 0.06);
+}
+
+.module-table td {
+  padding: 12px;
+  font-size: 0.95rem;
+}
+
+.module-table input[type="checkbox"] {
+  transform: scale(1.2);
+  cursor: pointer;
+}
+
+.module-table input[type="button"] {
+  border: none;
+  background: #ffe0c2;
+  padding: 6px 12px;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background 0.2s ease;
+}
+
+.module-table input[type="button"]:hover {
+  background: #ffcfa1;
+}
+
+/* ====== Save Button ====== */
+.save-btn {
+  margin-top: 16px;
+  background: linear-gradient(135deg, #f4b860, #e49e3d);
+  color: #4a3200;
+  font-weight: 600;
+  border-radius: 12px;
+  padding: 10px 0;
+  text-transform: none;
+}
+
+.save-btn:hover {
+  background: linear-gradient(135deg, #eaa846, #d8922f);
+}
