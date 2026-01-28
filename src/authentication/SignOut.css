@@ -1,0 +1,135 @@
+/* ================================
+   Root layout
+================================ */
+.signout-root {
+  position: relative;
+  min-height: 100vh;
+  width: 100%;
+  font-family: "Inter", system-ui, sans-serif;
+  overflow: hidden;
+
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* ================================
+   Background illustration
+================================ */
+.signout-image {
+  position: absolute;
+  inset: 0;
+
+  background-image: url("../assets/signout-illustration.png"); 
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+
+  filter: blur(0.5px) brightness(0.95);
+  transform: scale(1.05);
+}
+
+.signout-image::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+
+  background: rgba(251, 246, 237, 0.35);
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(10px);
+}
+
+/* ================================
+   Centered overlay
+================================ */
+.signout-overlay {
+  position: relative;
+  z-index: 1;
+
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+}
+
+/* ================================
+   Glass card
+================================ */
+.signout-paper {
+  width: 100%;
+  max-width: 440px;
+  border-radius: 28px;
+
+  background: linear-gradient(
+    180deg,
+    rgba(238, 242, 232, 0.88),
+    rgba(244, 239, 230, 0.88)
+  );
+
+  backdrop-filter: blur(18px);
+  -webkit-backdrop-filter: blur(18px);
+
+  box-shadow:
+    inset 0 0 0 1px rgba(139, 107, 63, 0.18),
+    0 20px 40px rgba(59, 47, 28, 0.25);
+
+  display: flex;
+  justify-content: center;
+}
+
+/* ================================
+   Content
+================================ */
+.signout-box {
+  width: 100%;
+  padding: 48px 44px;
+  text-align: center;
+}
+
+/* ================================
+   Avatar & title
+================================ */
+.signout-avatar {
+  background: linear-gradient(135deg, #4f6f52, #8b6b3f);
+  color: #fbf6ed;
+  margin: 0 auto 18px;
+  width: 48px;
+  height: 48px;
+}
+
+.signout-title {
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  margin-bottom: 28px;
+  color: #3b2f1c;
+}
+
+/* ================================
+   Button (match signin)
+================================ */
+.signout-button {
+  height: 56px;
+  border-radius: 16px;
+
+  font-family: inherit;
+  font-weight: 600;
+  font-size: 0.95rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+
+  background: linear-gradient(135deg, #4f6f52, #3f5f45);
+  color: #fbf6ed;
+
+  box-shadow: 0 10px 20px rgba(79, 111, 82, 0.28);
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
+}
+
+.signout-button:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 14px 26px rgba(79, 111, 82, 0.38);
+}
+
+.signout-button:active {
+  transform: translateY(0);
+  box-shadow: 0 8px 16px rgba(79, 111, 82, 0.32);
+}

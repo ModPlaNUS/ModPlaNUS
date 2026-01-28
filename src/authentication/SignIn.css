@@ -1,0 +1,265 @@
+/* ================================
+   Root layout
+================================ */
+.signin-root {
+  position: relative;
+  min-height: 100vh;
+  width: 100%;
+  font-family: "Inter", system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+  overflow: hidden;
+}
+
+/* ================================
+   Fullscreen illustration background
+================================ */
+.signin-image {
+  position: absolute;
+  inset: 0;
+
+  background-image: url("../assets/signin-illustration.png");
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+
+  filter: blur(0.5px) brightness(0.95);
+  transform: scale(1.05);
+}
+
+.signin-image::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+
+  background: rgba(251, 246, 237, 0.35);
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(10px);
+}
+
+/* ================================
+   Centered overlay
+================================ */
+.signin-overlay {
+  position: relative;
+  z-index: 1;
+
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+}
+
+/* ================================
+   Glass card
+================================ */
+.signin-paper {
+  width: 100%;
+  max-width: 440px;
+  border-radius: 28px;
+
+  background: linear-gradient(
+    180deg,
+    rgba(238, 242, 232, 0.88),
+    rgba(244, 239, 230, 0.88)
+  );
+
+  backdrop-filter: blur(18px);
+  -webkit-backdrop-filter: blur(18px);
+
+  box-shadow:
+    inset 0 0 0 1px rgba(139, 107, 63, 0.18),
+    0 20px 40px rgba(59, 47, 28, 0.25);
+
+  display: flex;
+  justify-content: center;
+}
+
+/* ================================
+   Content box
+================================ */
+.signin-box {
+  width: 100%;
+  padding: 48px 44px;
+}
+
+/* ================================
+   Avatar & title
+================================ */
+.signin-avatar {
+  background: linear-gradient(135deg, #4f6f52, #8b6b3f);
+  color: #fbf6ed;
+  margin: 0 auto 18px;
+  width: 48px;
+  height: 48px;
+}
+
+.signin-title {
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  margin-bottom: 12px;
+  color: #3b2f1c;
+  text-align: center;
+}
+
+/* ================================
+   Form
+================================ */
+.signin-form {
+  width: 100%;
+  margin-top: 16px;
+}
+
+.signin-form .MuiTextField-root {
+  margin-top: 14px;
+}
+
+/* ================================
+   INPUTS (MUI-CORRECT)
+================================ */
+
+/* Input wrapper (background lives here) */
+.signin-form .MuiOutlinedInput-root {
+  border-radius: 18px;
+  background-color: #eef2e8;
+  transition: background-color 0.2s ease;
+}
+
+/* Hover */
+.signin-form .MuiOutlinedInput-root:hover {
+  background-color: #e6efe2;
+}
+
+/* Focus */
+.signin-form .MuiOutlinedInput-root.Mui-focused {
+  background-color: #dde8d8;
+}
+
+/* Input text */
+.signin-form .MuiOutlinedInput-input {
+  padding: 16px;
+  border-radius: 18px;
+  color: #3b2f1c;
+}
+
+/* ================================
+   Outline (kill blue)
+================================ */
+.signin-form .MuiOutlinedInput-notchedOutline {
+  border-color: #c7d6c0 !important;
+  transition: border-color 0.15s ease;
+}
+
+.signin-form
+  .MuiOutlinedInput-root.Mui-focused
+  .MuiOutlinedInput-notchedOutline {
+  border-color: #6b4f2a !important;
+  border-width: 2px;
+}
+
+/* ================================
+   Labels
+================================ */
+.signin-form .MuiInputLabel-root {
+  color: #6b4f2a;
+}
+
+.signin-form .MuiInputLabel-root.Mui-focused {
+  color: #6b4f2a !important;
+}
+
+/* ================================
+   Autofill (Chrome / Safari)
+================================ */
+.signin-form input:-webkit-autofill,
+.signin-form input:-webkit-autofill:hover,
+.signin-form input:-webkit-autofill:focus {
+  -webkit-box-shadow: 0 0 0 1000px #eef2e8 inset !important;
+  box-shadow: 0 0 0 1000px #eef2e8 inset !important;
+
+  -webkit-text-fill-color: #3b2f1c !important;
+  caret-color: #3b2f1c;
+
+  border-radius: 18px;
+  transition: background-color 5000s ease-in-out 0s;
+}
+
+/* Autofill + focus */
+.signin-form
+  .MuiOutlinedInput-root.Mui-focused
+  input:-webkit-autofill {
+  -webkit-box-shadow: 0 0 0 1000px #dde8d8 inset !important;
+}
+
+/* ================================
+   Primary Button (match signup)
+================================ */
+.signin-button {
+  margin-top: 28px;
+  margin-bottom: 22px;
+
+  height: 56px;
+  border-radius: 16px;
+
+  font-weight: 600;
+  font-size: 0.95rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+
+  background: linear-gradient(135deg, #4f6f52, #3f5f45);
+  color: #fbf6ed;
+
+  box-shadow: 0 10px 20px rgba(79, 111, 82, 0.28);
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
+}
+
+.signin-button:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 14px 26px rgba(79, 111, 82, 0.38);
+}
+
+.signin-button:active {
+  transform: translateY(0);
+  box-shadow: 0 8px 16px rgba(79, 111, 82, 0.32);
+}
+
+/* ================================
+   Links
+================================ */
+.signin-links {
+  display: flex;
+  justify-content: center;
+  gap: 32px;
+  margin-top: 6px;
+}
+
+.signin-link {
+  cursor: pointer;
+  font-weight: 500;
+  font-size: 0.95rem;
+  color: #6b4f2a !important;
+
+  padding: 8px 14px;
+  border-radius: 999px;
+  text-decoration: none !important;
+
+  transition:
+    background-color 0.2s ease,
+    box-shadow 0.2s ease,
+    color 0.2s ease;
+}
+
+.signin-link:hover {
+  background-color: rgba(107, 79, 42, 0.08);
+  color: #3b2f1c !important;
+  box-shadow: 0 8px 16px rgba(59, 47, 28, 0.12);
+}
+
+.signin-link:active {
+  transform: translateY(1px);
+  box-shadow: 0 5px 10px rgba(59, 47, 28, 0.16);
+}
+
+.signin-root,
+.signup-root {
+  font-family: "Inter", system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+}
