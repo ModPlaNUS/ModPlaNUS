@@ -31,53 +31,84 @@
   color: #6b4f1d;
 }
 
-/* ====== Table ====== */
+/* ================================
+   Module Table (Planner-matched)
+================================ */
 .module-table {
   width: 100%;
   border-collapse: separate;
-  border-spacing: 0 10px;
+  border-spacing: 0 0.45rem; /* tighter, matches planner */
 }
 
+/* Header */
 .module-table thead th {
   text-align: left;
-  font-size: 0.85rem;
-  color: #8a6a2d;
-  padding: 8px 12px;
+  font-size: 0.8rem;
+  text-transform: uppercase;
+  letter-spacing: 0.07em;
+  color: #5a3a18;
+  padding: 0.75rem;
+  background: #fff;
 }
 
+/* Rows */
 .module-table tbody tr {
-  background: #fffdf7;
-  border-radius: 10px;
-  transition: transform 0.15s ease, box-shadow 0.15s ease;
+  background: #fff;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+  transition:
+    transform 0.15s ease,
+    box-shadow 0.15s ease;
 }
 
 .module-table tbody tr:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 6px 14px rgba(0, 0, 0, 0.06);
+  transform: translateY(-0.5px);
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.1);
 }
 
+/* Cells */
 .module-table td {
-  padding: 12px;
-  font-size: 0.95rem;
+  padding: 0.75rem;
+  font-size: 0.9rem;
+  text-align: left;
 }
 
+/* Rounded row edges */
+.module-table tbody tr td:first-child {
+  border-radius: 12px 0 0 12px;
+}
+
+.module-table tbody tr td:last-child {
+  border-radius: 0 12px 12px 0;
+}
+
+/* Checkbox */
 .module-table input[type="checkbox"] {
-  transform: scale(1.2);
+  width: 16px;
+  height: 16px;
   cursor: pointer;
+  accent-color: #c76a2b;
 }
 
+/* Delete button */
 .module-table input[type="button"] {
   border: none;
-  background: #ffe0c2;
-  padding: 6px 12px;
+  background: #ffe4cf;
+  padding: 0.4rem 0.75rem;
   border-radius: 8px;
   cursor: pointer;
-  transition: background 0.2s ease;
+  font-size: 0.85rem;
+  color: #7a2e00;
+  transition:
+    background 0.2s ease,
+    transform 0.1s ease;
 }
 
 .module-table input[type="button"]:hover {
-  background: #ffcfa1;
+  background: #ffd2b0;
+  transform: scale(1.05);
 }
+
 
 /* ====== Save Button ====== */
 .save-btn {

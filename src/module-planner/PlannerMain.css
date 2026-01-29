@@ -1,10 +1,392 @@
+/* ================================
+   Root Planner Layout
+================================ */
+.Planner {
+  min-height: 100vh;
+  padding: 2.25rem 3rem;
 
-.planner{
-   text-align: center; 
-   display: flex;
-   justify-content: space-around;
-   align-items: center;
-   min-height: 10vh;
-   background-color: rgb(27, 28, 56);
-   color: rgba(255, 255, 255, 0.507) !important;   
+  background:
+    url("../assets/planner-background-bg.png") no-repeat center top,
+    linear-gradient(
+      180deg,
+      #fbf6ed 0%,
+      #f4ecdf 100%
+    );
+
+  background-size:
+    min(1400px, 100%) auto,
+    cover;
+
+  background-attachment:
+    fixed,
+    fixed;
+
+  font-family: "Inter", "Roboto", system-ui, sans-serif;
+  color: #3b2f1e;
+}
+
+
+/* ================================
+   Headings
+================================ */
+.planner-title {
+  position: relative;
+  text-align: center;
+  margin: 4rem 0 2.5rem;
+  font-family: "Playfair Display", "Cormorant Garamond", serif;
+  font-weight: 600;
+  letter-spacing: 0.05em;
+  color: #3a2a14;
+  font-size: clamp(2.8rem, 5vw, 3.6rem);
+  z-index: 1;
+}
+
+/* subtle whimsy */
+.planner-title span {
+  display: inline-block;
+  animation: float 4s ease-in-out infinite;
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-4px); }
+}
+
+/* ================================
+   Cards (GLOBAL)
+================================ */
+.planner-card {
+  background: #fffaf2;
+  padding: 1.5rem 2rem;
+  margin-bottom: 1.75rem;
+  border-radius: 16px;
+
+  box-shadow:
+    0 6px 18px rgba(140, 110, 70, 0.14),
+    inset 0 1px 0 rgba(255, 255, 255, 0.6);
+}
+
+/* Card titles */
+.planner-card h6,
+.planner-card h5 {
+  text-align: center;
+  margin-bottom: 1rem;
+  font-weight: 600;
+  color: #4a341d;
+}
+
+/* ================================
+   Summary Section
+================================ */
+.summary-box {
+  background: #fff;
+  padding: 0.65rem 1.1rem;
+  margin: 0.5rem auto;
+  border-radius: 10px;
+  max-width: 360px;
+  text-align: center;
+  font-size: 0.95rem;
+  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.07);
+}
+
+/* ================================
+   Forms
+================================ */
+.planner-form {
+  margin-top: 2rem;
+}
+
+.planner-form h2 {
+  margin-bottom: 1rem;
+  font-weight: 600;
+  color: #3a2a14;
+}
+
+/* Space out form controls */
+.planner-form .MuiAutocomplete-root,
+.planner-form .MuiTextField-root {
+  margin-bottom: 1.1rem;
+}
+
+/* ================================
+   Warnings Section
+================================ */
+.warnings-container {
+  margin-top: 1.5rem;
+}
+
+.warnings-empty {
+  text-align: center;
+  opacity: 0.7;
+  padding: 1rem;
+}
+
+/* ================================
+   Tables (Base)
+================================ */
+.planner-table {
+  width: 100%;
+  border-collapse: separate;
+  border-spacing: 0 0.45rem;
+}
+
+/* Header */
+.planner-table thead th {
+  background: #fff;
+  padding: 0.75rem;
+  font-size: 0.8rem;
+  text-transform: uppercase;
+  letter-spacing: 0.07em;
+  color: #5a3a18;
+  border-bottom: none;
+}
+
+/* Rows */
+.planner-table tbody tr {
+  background: #fff;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+}
+
+.planner-table tbody td {
+  padding: 0.75rem;
+  text-align: center;
+  font-size: 0.9rem;
+}
+
+/* Round row edges */
+.planner-table tbody tr td:first-child {
+  border-radius: 12px 0 0 12px;
+}
+
+.planner-table tbody tr td:last-child {
+  border-radius: 0 12px 12px 0;
+}
+
+/* Hover (subtle) */
+.planner-table tbody tr:hover {
+  transform: translateY(-0.5px);
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.1);
+}
+
+/* ================================
+   Warnings Table (Accent)
+================================ */
+.warnings-table thead th {
+  background: #ffe4cf;
+  color: #7a2e00;
+}
+
+/* Active warnings */
+.warning-active {
+  background: #fff4ea !important;
+}
+
+.warning-active .warning-message {
+  color: #8b3a00;
+  font-weight: 500;
+}
+
+/* Handled warnings */
+.warning-handled {
+  opacity: 0.5;
+  text-decoration: line-through;
+}
+
+/* Warning message cell */
+.warning-message {
+  text-align: left;
+  line-height: 1.35;
+  padding-right: 1rem;
+}
+
+/* ================================
+   Checkboxes
+================================ */
+.planner-checkbox {
+  width: 16px;
+  height: 16px;
+  cursor: pointer;
+  accent-color: #c76a2b;
+}
+
+/* ================================
+   Buttons
+================================ */
+.save-button {
+  margin: 2rem auto 1.5rem;
+  display: flex;
+  justify-content: center;
+}
+
+.MuiButton-contained {
+  background: linear-gradient(135deg, #d27c3a, #b85f1e);
+  color: #fff;
+  padding: 0.65rem 1.9rem;
+  border-radius: 999px;
+  font-weight: 600;
+  letter-spacing: 0.03em;
+  box-shadow: 0 5px 14px rgba(184, 95, 30, 0.35);
+}
+
+.MuiButton-contained:hover {
+  box-shadow: 0 7px 18px rgba(184, 95, 30, 0.45);
+}
+
+/* ================================
+   Utility spacing
+================================ */
+.spacer {
+  margin: 1.25rem 0;
+}
+
+/* ================================
+   Responsive
+================================ */
+@media (max-width: 900px) {
+  .Planner {
+    padding: 1.75rem 1.25rem;
+  }
+
+  .planner-card {
+    padding: 1.25rem;
+  }
+}
+
+/* ================================
+   Planner Select Wrapper
+================================ */
+.planner-select-wrapper {
+  min-width: 160px;
+}
+
+/* ================================
+   Form Control
+================================ */
+.planner-select {
+  background: #fffaf2;
+  border-radius: 12px;
+}
+
+/* Label */
+.planner-select .MuiInputLabel-root {
+  color: #6a4a2a;
+  font-weight: 500;
+}
+
+.planner-select .MuiInputLabel-root.Mui-focused {
+  color: #c76a2b;
+}
+
+/* Select field */
+.planner-select .MuiOutlinedInput-root {
+  border-radius: 12px;
+  background-color: #fffaf2;
+}
+
+/* Outline */
+.planner-select .MuiOutlinedInput-notchedOutline {
+  border-color: rgba(160, 120, 80, 0.35);
+}
+
+.planner-select .MuiOutlinedInput-root:hover
+  .MuiOutlinedInput-notchedOutline {
+  border-color: #c76a2b;
+}
+
+.planner-select .MuiOutlinedInput-root.Mui-focused
+  .MuiOutlinedInput-notchedOutline {
+  border-color: #c76a2b;
+  border-width: 2px;
+}
+
+/* Selected value */
+.planner-select .MuiSelect-select {
+  padding: 0.85rem 0.9rem;
+  font-size: 0.95rem;
+  color: #3b2f1e;
+}
+
+/* Dropdown icon */
+.planner-select .MuiSvgIcon-root {
+  color: #8a5a2b;
+}
+
+/* ================================
+   Menu Items
+================================ */
+.MuiMenuItem-root {
+  font-size: 0.9rem;
+  color: #3b2f1e;
+}
+
+.MuiMenuItem-root.Mui-selected {
+  background-color: #fff0e2 !important;
+}
+
+.MuiMenuItem-root.Mui-selected:hover {
+  background-color: #ffe2c8 !important;
+}
+
+
+/* ================================
+   Module Search Autocomplete
+================================ */
+.search-mod-autocomplete {
+  width: 300px;
+  margin: 0 auto;
+}
+
+/* Input root */
+.search-mod-autocomplete .MuiOutlinedInput-root {
+  background: #fff;
+  border-radius: 12px;
+  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.08);
+  transition: box-shadow 0.2s ease;
+}
+
+/* Hover / focus */
+.search-mod-autocomplete .MuiOutlinedInput-root:hover,
+.search-mod-autocomplete .MuiOutlinedInput-root.Mui-focused {
+  box-shadow: 0 5px 14px rgba(0, 0, 0, 0.12);
+}
+
+/* Outline color */
+.search-mod-autocomplete .MuiOutlinedInput-notchedOutline {
+  border-color: rgba(140, 110, 70, 0.35);
+}
+
+.search-mod-autocomplete
+  .MuiOutlinedInput-root.Mui-focused
+  .MuiOutlinedInput-notchedOutline {
+  border-color: #c76a2b;
+  border-width: 2px;
+}
+
+/* Label */
+.search-mod-autocomplete .MuiInputLabel-root {
+  color: #6a4a28;
+}
+
+.search-mod-autocomplete .MuiInputLabel-root.Mui-focused {
+  color: #c76a2b;
+}
+
+/* Dropdown paper */
+.search-mod-autocomplete .MuiAutocomplete-paper {
+  border-radius: 14px;
+  margin-top: 6px;
+  box-shadow: 0 8px 22px rgba(0, 0, 0, 0.15);
+}
+
+/* Options */
+.search-mod-autocomplete .MuiAutocomplete-option {
+  padding: 0.6rem 1rem;
+  font-size: 0.9rem;
+}
+
+/* Highlighted option */
+.search-mod-autocomplete .MuiAutocomplete-option[aria-selected="true"],
+.search-mod-autocomplete .MuiAutocomplete-option.Mui-focused {
+  background-color: #fff4ea;
 }
