@@ -1,0 +1,133 @@
+/* ================================
+   Page container
+================================ */
+.profile-root {
+  max-width: clamp(960px, 85vw, 1200px);
+  margin: 0 auto;
+  padding: 3rem 2rem 4rem;
+  background-image: url("../assets/profile-background.png");
+  background-position: center;
+}
+
+.profile-grid {
+  background: rgba(255, 250, 240, 0.85);
+  padding: 2.5rem;
+  border-radius: 18px;
+}
+
+
+/* ================================
+   Title
+================================ */
+.profile-root h3 {
+  text-align: center;
+  font-weight: 600;
+  margin-bottom: 2.5rem;
+}
+
+/* ================================
+   Form grid
+================================ */
+.profile-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  column-gap: 2rem;
+  row-gap: 2rem;
+  width: 100%;
+  justify-items: stretch;
+}
+
+/* Email + actions full width */
+.profile-field:first-child,
+.profile-actions {
+  grid-column: 1 / -1;
+}
+
+/* ================================
+   Field wrapper
+================================ */
+.profile-field {
+  display: flex;
+  flex-direction: column;
+  gap: 0.1rem;
+}
+
+/* ================================
+   Labels
+================================ */
+.profile-label {
+  font-size: 1rem;
+  font-weight: 1000;
+  color: #42300e;
+  margin-bottom: 0.15rem;
+}
+
+/* ================================
+   Inputs (single clean box)
+================================ */
+.MuiTextField-root {
+  width: auto;
+}
+
+.MuiOutlinedInput-root {
+  background-color: rgba(255, 248, 235, 0.95);
+  border-radius: 10px;
+}
+
+/* Default border */
+.MuiOutlinedInput-notchedOutline {
+  border-color: #b8a57a;
+  border-width: 2px;
+}
+
+
+/* Focus state */
+.MuiOutlinedInput-root.Mui-focused
+  .MuiOutlinedInput-notchedOutline {
+  border-color: #9c8356;
+  border-width: 2px;
+}
+
+/* Disabled (email) */
+.MuiOutlinedInput-root.Mui-disabled {
+  background-color: #a1772a63;
+}
+
+/* Helper text */
+.MuiFormHelperText-root {
+  margin-left: 0;
+  font-size: 0.8rem;
+  color: #6f6f6f;
+}
+
+/* ================================
+   Actions
+================================ */
+.profile-actions {
+  margin-top: 2rem;
+  display: flex;
+  justify-content: center; /* centers buttons */
+  gap: 2.5rem;
+}
+
+.profile-actions button {
+  width: auto;
+  inner-width: auto;
+  height: auto;
+  padding: 0.6rem 2rem;
+  border-radius: 10px;
+}
+
+/* ================================
+   Mobile
+================================ */
+@media (max-width: 768px) {
+  .profile-grid {
+    grid-template-columns: 1fr;
+    row-gap: 2rem;
+  }
+
+  .profile-actions {
+    justify-content: center;
+  }
+}

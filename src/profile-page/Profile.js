@@ -11,17 +11,10 @@ import 'firebase/compat/auth';
 import 'firebase/compat/database';
 import { useNavigate } from 'react-router-dom';
 import { db } from '../authentication/firebase-config';
-import {
-  onSnapshot,
-  updateDoc,
-  doc,
-} from "firebase/firestore";
-import '@firebase/firestore'
+import { onSnapshot, updateDoc, doc } from 'firebase/firestore';
+import './Profile.css';
 
-export default function Profile() { 
-
-
-
+export default function Profile() {
   const [firstName, setFirstName] = useState('');
   const [lastName, setLastName] = useState('');
   const [displayName, setDisplayName] = useState('');
@@ -30,247 +23,141 @@ export default function Profile() {
   const [otherProgrammes, setOtherProgrammes] = useState('');
   const [year, setYear] = useState('');
   const [semester, setSemester] = useState('');
+  const [userInfo, setUserInfo] = useState({});
 
-
-  const [userInfo, setUserInfo] = useState([]);
+  const user = firebase.auth().currentUser;
+  const navigate = useNavigate();
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    updateUser(firebase.auth().currentUser.uid);  
+    updateUser(firebase.auth().currentUser.uid);
   };
 
-  function getInfo(){
-    if(firebase.auth().currentUser){
-
-      const user = onSnapshot(doc(db, "users", firebase.auth().currentUser.uid), 
-       (doc) => {
-         setUserInfo(doc.data());
-        });
-        return user;
-      } else {
-      }
+  function getInfo() {
+    if (firebase.auth().currentUser) {
+      return onSnapshot(
+        doc(db, 'users', firebase.auth().currentUser.uid),
+        (doc) => setUserInfo(doc.data())
+      );
+    }
   }
 
-  React.useEffect(()=>{getInfo()}, []);
-  React.useEffect(()=>{
-    setOtherProgrammes(userInfo.otherProgrammes);
-    setMinor(userInfo.minor);
-    setMajor(userInfo.major);
-    setSemester(userInfo.semester);
-    setYear(userInfo.year);
-    setDisplayName(userInfo.displayName);
-    setLastName(userInfo.lastName);
-    setFirstName(userInfo.firstName);
-  }, [userInfo])
-  const user = firebase.auth().currentUser;
+  React.useEffect(() => {
+    getInfo();
+  }, []);
+
+  React.useEffect(() => {
+    setFirstName(userInfo.firstName || '');
+    setLastName(userInfo.lastName || '');
+    setDisplayName(userInfo.displayName || '');
+    setYear(userInfo.year || '');
+    setSemester(userInfo.semester || '');
+    setMajor(userInfo.major || '');
+    setMinor(userInfo.minor || '');
+    setOtherProgrammes(userInfo.otherProgrammes || '');
+  }, [userInfo]);
 
   const deleteUser = () => {
-    user.delete()
-    .then(()=>goToDashBoard())
-    .then(() => alert("We are sad to see you go!"))
-    .catch((error) => alert(error.message))
-};
-  
+    user
+      .delete()
+      .then(() => navigate('/dashboard'))
+      .then(() => alert('We are sad to see you go!'))
+      .catch((error) => alert(error.message));
+  };
 
   const updateUser = async (id) => {
-    const userDoc = doc(db, "users", id);
-    const userNew = {
-      firstName: firstName,
-      lastName: lastName,
-      displayName: displayName,
-      year: year,
-      semester: semester,
-      major: major,
-      minor: minor,
-      otherProgrammes: otherProgrammes,
-    }
-    await updateDoc(userDoc, userNew);
+    const userDoc = doc(db, 'users', id);
+    await updateDoc(userDoc, {
+      firstName,
+      lastName,
+      displayName,
+      year,
+      semester,
+      major,
+      minor,
+      otherProgrammes,
+    });
   };
-
-  const goTo = useNavigate();
-  
-  const goToDashBoard = () =>{
-        goTo('/dashboard');
-  };
-
-
-  
 
   return (
-    <React.Fragment>
-      <Typography variant="h3" gutterBottom>
-        My Profile 
-      </Typography>
+    <div className="profile-root">
+      <Typography variant="h3">Profile</Typography>
 
-<p></p>
-
-<p></p>
-
-<Grid item xs={12} sm={6} m={5}>
-          <Typography variant='h6'>
-     Email
-      </Typography>
-      <p></p>
+      <Grid container className="profile-grid">
+        {/* EMAIL (full width) */}
+        <Grid item xs={12} className="profile-field">
+          <Typography className="profile-label">Email</Typography>
           <TextField
-          disabled
-            id="email"
-            name="email"
-            value={userInfo.email}
             fullWidth
-            autoComplete="email"
-            variant="outlined"
+            disabled
+            value={userInfo.email || ''}
             helperText="You can not edit this field"
           />
         </Grid>
-      <Grid item xs={12} sm={6} m={5}>
-      <Typography variant='h6'>
-      First Name
-      </Typography>
-      <p></p>
-      
-          <TextField
-            required
-            id="firstName"
-            name="firstName"
-            fullWidth
-            value={firstName}
-            autoComplete="given-name"
-            variant="outlined"
-            onChange={(e) => {setFirstName(e.target.value)}}
-          />
+
+        {/* NAME */}
+        <Grid item xs={12} className="profile-field">
+          <Typography className="profile-label">First Name</Typography>
+          <TextField fullWidth value={firstName} onChange={(e) => setFirstName(e.target.value)} />
         </Grid>
 
-        <Grid item xs={12} sm={6} m={5}>
-        <Typography variant='h6'>
-      Last Name
-      </Typography>
-      <p></p>
-          <TextField
-            required
-            id="lastName"
-            name="lastName"
-            value={lastName}
-            fullWidth
-            autoComplete="family-name"
-            variant="outlined"
-            onChange={(e) => setLastName(e.target.value)}
-          />
-          </Grid>
+        <Grid item xs={12} className="profile-field">
+          <Typography className="profile-label">Last Name</Typography>
+          <TextField fullWidth value={lastName} onChange={(e) => setLastName(e.target.value)} />
+        </Grid>
 
-          <Grid item xs={12} sm={6} m={5}>
-          <Typography variant='h6'>
-     Display Name
-      </Typography>
-      <p></p>
+        {/* IDENTITY */}
+        <Grid item xs={12} className="profile-field">
+          <Typography className="profile-label">Display Name</Typography>
           <TextField
-            required
-            id="displayName"
-            name="displayName"
-            value={displayName}
             fullWidth
-            helperText="You will be visible to other users as this"
-            autoComplete="display-name"
-            variant="outlined"
+            value={displayName}
+            helperText="Visible to other users"
             onChange={(e) => setDisplayName(e.target.value)}
           />
         </Grid>
-        <Grid item xs={12} sm={6} m={5}>
-        <Typography variant='h6'>
-      Year
-      </Typography>
-      <p></p>
-          <TextField
-            required
-            id="year"
-            name="year"
-            value={year}
-            fullWidth
-            helperText="Current year of study"
-            autoComplete="year"
-            variant="outlined"
-            onChange={(e) => setYear(e.target.value)}
-          />
-          </Grid>
-        <Grid item xs={12} sm={6} m={5}>
-        <Typography variant='h6'>
-      Semester
-      </Typography>
-      <p></p>
-          <TextField
-            required
-            id="semester"
-            name="semester"
-            value={semester}
-            fullWidth
-            helperText="Current semester of study"
-            variant="outlined"
-            onChange={(e) => setSemester(e.target.value)}
-          />
+
+        <Grid item xs={12} className="profile-field">
+          <Typography className="profile-label">Year</Typography>
+          <TextField fullWidth value={year} onChange={(e) => setYear(e.target.value)} />
         </Grid>
-        <Grid item xs={12} m={5}>
-        <Typography variant='h6'>
-      Major
-      </Typography>
-      <p></p>
-          <TextField
-            required
-            id="major"
-            name="major"
-            value={major}
-            fullWidth
-            autoComplete="major"
-            variant="outlined"
-            onChange={(e) => setMajor(e.target.value)}
-          />
+
+        {/* ACADEMICS */}
+        <Grid item xs={12} className="profile-field">
+          <Typography className="profile-label">Semester</Typography>
+          <TextField fullWidth value={semester} onChange={(e) => setSemester(e.target.value)} />
         </Grid>
-        <Grid item xs={12} m={5}>
-        <Typography variant='h6'>
-      Minor
-      </Typography>
-      <p></p>
-          <TextField
-            id="minor"
-            name="minor"
-            value={minor}
-            fullWidth
-            autoComplete="minor"
-            variant="outlined"
-            onChange={(e) => setMinor(e.target.value)}
-          />
+
+        <Grid item xs={12} className="profile-field">
+          <Typography className="profile-label">Major</Typography>
+          <TextField fullWidth value={major} onChange={(e) => setMajor(e.target.value)} />
         </Grid>
-        <Grid item xs={12} sm={6} m={5}>
-        <Typography variant='h6'>
-      Other Programmes
-      </Typography>
-      <p></p>
+
+        <Grid item xs={12} className="profile-field">
+          <Typography className="profile-label">Minor</Typography>
+          <TextField fullWidth value={minor} onChange={(e) => setMinor(e.target.value)} />
+        </Grid>
+
+        <Grid item xs={12} className="profile-field">
+          <Typography className="profile-label">Other Programmes</Typography>
           <TextField
-            id="other programmes"
-            name="other programmes"
-            value= {otherProgrammes}
             fullWidth
-            helperText="Such as USP, Doube Major, etc."
-            autoComplete="other programmes"
-            variant="outlined"
+            value={otherProgrammes}
+            helperText="USP, Double Major, etc."
             onChange={(e) => setOtherProgrammes(e.target.value)}
           />
         </Grid>
-        <p></p>
-        <Grid item xs={12} m={5}>
-        <Button variant="contained" 
-        startIcon={<SaveIcon />} 
-        sx ={{m: 4}}
-        onClick={handleSubmit}
-        >
-        Save Changes
-        </Button>
-        <Button variant="outlined" 
-        startIcon={<DeleteIcon />}
-        sx ={{m: 4}}
-        onClick={deleteUser}
-        >
-        Delete Account
-        </Button>
+
+        {/* ACTIONS */}
+        <Grid item xs={12} className="profile-actions">
+          <Button variant="contained" startIcon={<SaveIcon />} onClick={handleSubmit}>
+            Save Changes
+          </Button>
+          <Button variant="outlined" startIcon={<DeleteIcon />} onClick={deleteUser}>
+            Delete Account
+          </Button>
         </Grid>
-    </React.Fragment>
+      </Grid>
+    </div>
   );
 }

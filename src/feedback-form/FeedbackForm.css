@@ -1,0 +1,101 @@
+/* FeedbackForm.css */
+
+/* General form container */
+.feedback-form {
+  width: 100%;
+  max-width: auto;
+  margin: 0 auto;
+
+  padding: 2.5rem 3rem;
+  border-radius: 16px;
+
+  background-image: url("../assets/feedback-background.png");
+  background-position: center;
+
+  background-color: #fbf6ee;           /* fallback parchment */
+
+}
+
+.feedback-form::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: rgba(251, 246, 238, 0.85);
+  border-radius: inherit;
+  z-index: 0;
+}
+
+.feedback-form > * {
+  position: relative;
+  z-index: 1;
+}
+
+
+
+/* ================================
+   Header
+================================ */
+.feedback-header {
+  max-width: 720px;
+  margin: 0 auto 2.5rem auto; /* center + spacing */
+  text-align: center;
+}
+
+/* ================================
+   Card
+================================ */
+.feedback-card {
+  max-width: auto;
+  margin: 0 auto;            /* center card */
+  border-radius: 16px;
+}
+
+/* ================================
+   Card content layout
+================================ */
+.feedback-card-content {
+  display: flex;
+  flex-direction: column;
+  gap: 1.75rem;
+}
+
+/* ================================
+   Individual fields
+================================ */
+.feedback-field {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+/* ================================
+   Submit button
+================================ */
+.feedback-button {
+  margin-top: 28px;
+  margin-bottom: 22px;
+
+  height: 56px;
+  border-radius: 16px;
+
+  font-weight: 600;
+  font-size: 0.95rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+
+  background: linear-gradient(135deg, #4f6f52, #3f5f45);
+  color: #fbf6ed;
+
+  box-shadow: 0 10px 20px rgba(79, 111, 82, 0.28);
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
+}
+
+.feedback-button:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 14px 26px rgba(79, 111, 82, 0.38);
+}
+
+.feedback-button:active {
+  transform: translateY(0);
+  box-shadow: 0 8px 16px rgba(79, 111, 82, 0.32);
+}
