@@ -1,6 +1,6 @@
 import React from "react";
 import { useState } from "react";
-import Box from "./components/box/Box";
+import Box from "./Box";
 import Button from "@mui/material/Button";
 import TextField from '@mui/material/TextField';
 import Autocomplete from '@mui/material/Autocomplete';

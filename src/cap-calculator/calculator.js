@@ -1,6 +1,6 @@
 import React from "react";
 import { useState } from "react";
-import Box from "../module-planner/components/box/Box";
+import Box from "../module-planner/Box";
 import Button from "@mui/material/Button";
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import Typography from '@mui/material/Typography';

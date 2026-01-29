@@ -13,7 +13,7 @@ import {
   Container,
 } from "@mui/material";
 import { useNavigate } from "react-router-dom";
-import Footer from "../components/Footer";
+import Footer from "./Footer";
 import "./Dashboard.css";
 
 const tiers = [
