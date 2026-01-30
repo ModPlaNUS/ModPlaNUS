@@ -4,6 +4,8 @@ ModPlaNUS is a comprehensive web application designed to help NUS students plan,
 
 From checking module compatibility to tracking graduation progress, ModPlaNUS removes the guesswork from semester planning and makes navigating university requirements simpler and more intuitive.
 
+🌐 **Live Website:** [https://modplanus.netlify.app](https://modplanus.netlify.app)
+
 ---
 
 ## ✨ Features
