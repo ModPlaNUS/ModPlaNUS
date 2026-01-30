@@ -20,7 +20,7 @@ import ButtonPanel from './dashboard/ButtonPanel';
 
 import Home from './homepage/Home';
 import Planner from './module-planner/PlannerMain';
-import Calculator from './cap-calculator/calculator';
+import Calculator from './cap-calculator/Calculator';
 import Dashboard from './dashboard/Dashboard';
 import Profile from './profile-page/Profile';
 import FeedbackForm from './feedback-form/FeedbackForm';

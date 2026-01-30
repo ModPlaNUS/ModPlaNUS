@@ -1,0 +1,197 @@
+/* ================================
+   Page background
+================================ */
+.calculator-bg {
+  min-height: 100vh;
+  padding: 4rem 2rem;
+
+  background-image: url("../assets/calculator-background.png");
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+}
+
+/* ================================
+   Card container
+================================ */
+.calculator-card {
+  width: 100%;
+  max-width: 720px;
+  padding: 3.5rem 3rem;
+
+  background-color: rgba(255, 252, 245, 0.96);
+  border-radius: 22px;
+  justify-content: center;
+
+  box-shadow:
+    0 12px 40px rgba(0, 0, 0, 0.08),
+    inset 0 0 0 1px rgba(200, 180, 140, 0.25);
+}
+
+/* ================================
+   Title
+================================ */
+.calculator-title {
+  text-align: center;
+  font-weight: 600;
+  letter-spacing: 0.3px;
+  margin-bottom: 3rem;
+  color: #2e2618;
+}
+
+/* ================================
+   Form layout
+================================ */
+.calculator-form {
+  display: grid;
+  gap: 0.5rem;
+  margin-bottom: 3rem;
+  margin-top: 1rem;
+}
+
+/* ================================
+   Labels
+================================ */
+.calculator-form .MuiTypography-root {
+  font-size: 1.5 rem;
+  font-weight: 600;
+  color: #4a3b1f;
+  margin-top: 0.25rem;
+  margin-bottom: 0.25rem;
+  gap: 0.5rem;
+}
+
+/* ================================
+   INPUTS – FIX BLUE UNDERLINE
+================================ */
+
+/* Remove default MUI underline */
+.MuiInput-underline:before,
+.MuiInput-underline:after {
+  display: none;
+}
+
+/* Input base */
+.MuiInput-root {
+  width: 100%;
+  background-color: #fbf1dc;
+  border-radius: 12px;
+  padding: 0.9rem 1rem;
+
+  border: 2px solid #cbb58a;
+  transition: border-color 0.2s ease, background-color 0.2s ease;
+}
+
+/* Focus */
+.MuiInput-root.Mui-focused {
+  border-color: #a88444;
+  background-color: #fff6e6;
+}
+
+/* ================================
+   SELECT (Grade dropdown)
+================================ */
+.MuiSelect-select {
+  background-color: #fbf1dc;
+  border-radius: 12px;
+  padding: 0.9rem 1rem;
+}
+
+.MuiOutlinedInput-notchedOutline {
+  border: 2px solid #cbb58a;
+}
+
+.MuiOutlinedInput-root.Mui-focused
+  .MuiOutlinedInput-notchedOutline {
+  border-color: #a88444;
+}
+
+/* ================================
+   Add Module button
+================================ */
+.calculator-form button {
+  margin-top: 2rem;
+  padding: 0.2rem;
+  border-radius: 12px;
+  font-weight: 600;
+  letter-spacing: 0.4px;
+  background-color: #c87532;
+}
+
+.calculator-form button:hover {
+  background-color: #b3682c;
+}
+
+/* ================================
+   Table
+================================ */
+.calculator-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-bottom: 2.5rem;
+}
+
+.calculator-table th,
+.calculator-table td {
+  padding: 0.85rem;
+  text-align: center;
+  font-size: 0.9rem;
+}
+
+.calculator-table th {
+  background-color: #f2e4c8;
+  font-weight: 600;
+  color: #3b2f1c;
+  border-bottom: 2px solid #cbb58a;
+}
+
+.calculator-table td {
+  border-bottom: 1px solid #e1d3b4;
+}
+
+/* ================================
+   CAP Highlight
+================================ */
+.calculator-cap {
+  margin: 3rem auto 4rem auto;   /* centers horizontally */
+  padding: 1.2rem 2.5rem;
+  text-transform: uppercase;
+
+  display: block;               /* important */
+  width: fit-content;
+
+  border-radius: 999px;
+  background-color: #f2e4c8;
+  border: 2px solid #cbb58a;
+
+  font-weight: 1000;
+  font-size: 1.1rem;
+  letter-spacing: 0.4px;
+  color: #3a2f1d;
+
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.08);
+  text-align: center;
+}
+
+
+
+/* ================================
+   Save button
+================================ */
+.calculator-card > button {
+  display: block;
+  margin: 2rem auto 0;      /* more vertical distance */
+  padding: 0.9rem 3rem;
+  justify-content: center;
+  align-self: center;
+  border-radius: 10px;
+  font-weight: 700;
+  letter-spacing: 0.6px;
+  font-size: 0.95rem;
+
+  box-shadow: 0 8px 22px rgba(0, 0, 0, 0.12);
+}
